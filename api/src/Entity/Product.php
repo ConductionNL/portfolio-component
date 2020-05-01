@@ -54,7 +54,7 @@ class Product
      *
      * @example Art and me
      * @Groups({"read", "write"})
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=2550)
      * @Assert\Length(
      *     max = 255
      * )
@@ -69,7 +69,7 @@ class Product
      * @Groups({"read", "write"})
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(
-     *     max = 255
+     *     max = 2550
      * )
      * @Assert\NotNull
      */
