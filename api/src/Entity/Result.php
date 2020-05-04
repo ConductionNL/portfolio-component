@@ -101,7 +101,7 @@ class Result
      * @ORM\OneToMany(targetEntity="App\Entity\FormalRecognition", mappedBy="result")
      * @MaxDepth(1)
      */
-    private $formalrecognitions;
+    private $formalRecognitions;
 
     /**
      * @Groups({"read","write"})
@@ -133,7 +133,7 @@ class Result
         $this->products = new ArrayCollection();
         $this->activities = new ArrayCollection();
         $this->evaluations = new ArrayCollection();
-        $this->formalrecognitions = new ArrayCollection();
+        $this->formalRecognitions = new ArrayCollection();
         $this->reflections = new ArrayCollection();
     }
 
@@ -165,8 +165,6 @@ class Result
 
         return $this;
     }
-
-
 
     /**
      * @return Collection|Product[]
@@ -266,14 +264,14 @@ class Result
      */
     public function getFormalRecognitions(): Collection
     {
-        return $this->formalrecognitions;
+        return $this->formalRecognitions;
     }
 
-    public function addFormalRecognition(FormalRecognition $formalrecognition): self
+    public function addFormalRecognition(FormalRecognition $formalRecognition): self
     {
-        if (!$this->formalrecognitions->contains($formalrecognition)) {
-            $this->formalrecognitions[] = $formalrecognition;
-            $formalrecognition->setResult($this);
+        if (!$this->formalRecognitions->contains($formalRecognition)) {
+            $this->formalRecognitions[] = $formalRecognition;
+            $formalRecognition->setResult($this);
         }
 
         return $this;
@@ -281,8 +279,8 @@ class Result
 
     public function removeFormalRecognition(FormalRecognition $formalRecognition): self
     {
-        if ($this->formalrecognitions->contains($formalRecognition)) {
-            $this->formalrecognitions->removeElement($formalRecognition);
+        if ($this->formalRecognitions->contains($formalRecognition)) {
+            $this->formalRecognitions->removeElement($formalRecognition);
             // set the owning side to null (unless already changed)
             if ($formalRecognition->setResult() === $this) {
                 $formalRecognition->setResult(null);
@@ -292,7 +290,36 @@ class Result
         return $this;
     }
 
+    /**
+     * @return Collection|Reflection[]
+     */
+    public function getReflections(): Collection
+    {
+        return $this->reflections;
+    }
 
+    public function addReflection(Reflection $reflection): self
+    {
+        if (!$this->reflections->contains($reflection)) {
+            $this->reflections[] = $reflection;
+            $reflection->setResult($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReflection(Reflection $reflection): self
+    {
+        if ($this->reflections->contains($reflection)) {
+            $this->reflections->removeElement($reflection);
+            // set the owning side to null (unless already changed)
+            if ($reflection->setResult() === $this) {
+                $reflection->setResult(null);
+            }
+        }
+
+        return $this;
+    }
 
     public function getDateCreated(): ?\DateTimeInterface
     {

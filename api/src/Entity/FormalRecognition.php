@@ -122,7 +122,7 @@ class FormalRecognition
 
     /**
      * @Groups({"read","write"})
-     * @ORM\ManyToOne(targetEntity="App\Entity\Result", inversedBy="formalrecognitions")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Result", inversedBy="formalRecognitions")
      * @MaxDepth(1)
      */
     private $result;
