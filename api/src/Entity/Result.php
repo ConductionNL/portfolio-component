@@ -52,7 +52,7 @@ class Result
     /**
      * @var string Name of the Results
      *
-     * @example reflection name
+     * @example Result name
      * @Groups({"read", "write"})
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(

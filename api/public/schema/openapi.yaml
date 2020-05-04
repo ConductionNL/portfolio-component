@@ -6819,6 +6819,893 @@ paths:
             schema:
               $ref: '#/components/schemas/Reflection-write'
         description: 'The updated Reflection resource'
+  /results:
+    get:
+      tags:
+        - Result
+      operationId: getResultCollection
+      summary: 'Retrieves the collection of Result resources.'
+      responses:
+        200:
+          description: 'Result collection response'
+          content:
+            application/ld+json:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Result:jsonld-read' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/json+ld:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Result:jsonld-read' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Result-read'
+            application/json+hal:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Result-read'
+            application/vnd.api+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Result-read'
+            application/json+vnd.api:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Result-read'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Result-read'
+            application/health+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Result-read'
+            application/json+health:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Result-read'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Result-read'
+            application/x-yaml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Result-read'
+            text/csv:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Result-read'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Result-read'
+      parameters:
+        -
+          name: 'order[id]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[name]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[description]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[dateCreated]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[dateModified]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'dateCreated[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: id
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'id[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: name
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'name[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: description
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'description[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: dateCreated
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: dateModified
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: page
+          in: query
+          required: false
+          description: 'The collection page number'
+          schema:
+            type: integer
+            default: 1
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      produces:
+        - application/health+json
+    post:
+      tags:
+        - Result
+      operationId: postResultCollection
+      summary: 'Creates a Result resource.'
+      responses:
+        201:
+          description: 'Result resource created'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Result:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Result:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Result-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Result-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Result-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Result-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Result-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Result-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Result-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Result-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Result-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Result-read'
+          links:
+            GetResultItem:
+              parameters:
+                id: '$response.body#/id'
+              operationId: getResultItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /results/{id}`.'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Result:jsonld-write'
+          application/json+ld:
+            schema:
+              $ref: '#/components/schemas/Result:jsonld-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Result-write'
+          application/json+hal:
+            schema:
+              $ref: '#/components/schemas/Result-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Result-write'
+          application/json+vnd.api:
+            schema:
+              $ref: '#/components/schemas/Result-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Result-write'
+          application/health+json:
+            schema:
+              $ref: '#/components/schemas/Result-write'
+          application/json+health:
+            schema:
+              $ref: '#/components/schemas/Result-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Result-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Result-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Result-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Result-write'
+        description: 'The new Result resource'
+      parameters:
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+  '/results/{id}':
+    get:
+      tags:
+        - Result
+      operationId: getResultItem
+      summary: 'Retrieves a Result resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      responses:
+        200:
+          description: 'Result resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Result:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Result:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Result-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Result-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Result-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Result-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Result-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Result-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Result-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Result-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Result-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Result-read'
+        404:
+          description: 'Resource not found'
+      produces:
+        - application/health+json
+    delete:
+      tags:
+        - Result
+      operationId: deleteResultItem
+      summary: 'Removes the Result resource.'
+      responses:
+        204:
+          description: 'Result resource deleted'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+    put:
+      tags:
+        - Result
+      operationId: putResultItem
+      summary: 'Replaces the Result resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+      responses:
+        200:
+          description: 'Result resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Result:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Result:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Result-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Result-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Result-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Result-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Result-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Result-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Result-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Result-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Result-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Result-read'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Result:jsonld-write'
+          application/json+ld:
+            schema:
+              $ref: '#/components/schemas/Result:jsonld-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Result-write'
+          application/json+hal:
+            schema:
+              $ref: '#/components/schemas/Result-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Result-write'
+          application/json+vnd.api:
+            schema:
+              $ref: '#/components/schemas/Result-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Result-write'
+          application/health+json:
+            schema:
+              $ref: '#/components/schemas/Result-write'
+          application/json+health:
+            schema:
+              $ref: '#/components/schemas/Result-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Result-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Result-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Result-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Result-write'
+        description: 'The updated Result resource'
+    patch:
+      tags:
+        - Result
+      operationId: patchResultItem
+      summary: 'Updates the Result resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+      responses:
+        200:
+          description: 'Result resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Result:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Result:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Result-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Result-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Result-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Result-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Result-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Result-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Result-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Result-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Result-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Result-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Result-read'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Result:jsonld-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Result-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Result-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Result-write'
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/Result-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Result-write'
+          applications/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Result-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Result-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Result-write'
+        description: 'The updated Result resource'
 components:
   schemas:
     Activity-read:
@@ -6863,8 +7750,9 @@ components:
           description: 'reference for the activity'
           type: string
         result:
-          $ref: '#/components/schemas/Results-read'
+          $ref: '#/components/schemas/Result-read'
         products:
+          description: 'Products in this activity'
           type: array
           items:
             $ref: '#/components/schemas/Product-read'
@@ -6927,8 +7815,9 @@ components:
           description: 'reference for the activity'
           type: string
         result:
-          $ref: '#/components/schemas/Results-write'
+          $ref: '#/components/schemas/Result-write'
         products:
+          description: 'Products in this activity'
           type: array
           items:
             $ref: '#/components/schemas/Product-write'
@@ -6983,8 +7872,9 @@ components:
           description: 'reference for the activity'
           type: string
         result:
-          $ref: '#/components/schemas/Results:jsonld-read'
+          $ref: '#/components/schemas/Result:jsonld-read'
         products:
+          description: 'Products in this activity'
           type: array
           items:
             $ref: '#/components/schemas/Product:jsonld-read'
@@ -7056,8 +7946,9 @@ components:
           description: 'reference for the activity'
           type: string
         result:
-          $ref: '#/components/schemas/Results:jsonld-write'
+          $ref: '#/components/schemas/Result:jsonld-write'
         products:
+          description: 'Products in this activity'
           type: array
           items:
             $ref: '#/components/schemas/Product:jsonld-write'
@@ -7473,7 +8364,7 @@ components:
             url: 'http://schema.org/url'
           type: string
         result:
-          $ref: '#/components/schemas/Results-read'
+          $ref: '#/components/schemas/Result-read'
         dateCreated:
           readOnly: true
           description: 'The moment this resource was created'
@@ -7509,7 +8400,7 @@ components:
             url: 'http://schema.org/url'
           type: string
         result:
-          $ref: '#/components/schemas/Results-write'
+          $ref: '#/components/schemas/Result-write'
     'Evaluation:jsonld-read':
       type: object
       description: ''
@@ -7545,7 +8436,7 @@ components:
             url: 'http://schema.org/url'
           type: string
         result:
-          $ref: '#/components/schemas/Results:jsonld-read'
+          $ref: '#/components/schemas/Result:jsonld-read'
         dateCreated:
           readOnly: true
           description: 'The moment this resource was created'
@@ -7590,7 +8481,7 @@ components:
             url: 'http://schema.org/url'
           type: string
         result:
-          $ref: '#/components/schemas/Results:jsonld-write'
+          $ref: '#/components/schemas/Result:jsonld-write'
     FormalRecognition-read:
       type: object
       description: ''
@@ -7603,10 +8494,10 @@ components:
           type: string
           format: uuid
         name:
-          description: 'Name of the reflection'
+          description: 'Name of the recognition'
           type: string
         description:
-          description: 'Description of the reflection'
+          description: 'Description of the recognition'
           type: string
         organisation:
           description: 'Name of the organisation.'
@@ -7624,7 +8515,7 @@ components:
           type: string
           format: date-time
         result:
-          $ref: '#/components/schemas/Results-read'
+          $ref: '#/components/schemas/Result-read'
         dateCreated:
           readOnly: true
           description: 'The moment this resource was created'
@@ -7646,10 +8537,10 @@ components:
         - description
       properties:
         name:
-          description: 'Name of the reflection'
+          description: 'Name of the recognition'
           type: string
         description:
-          description: 'Description of the reflection'
+          description: 'Description of the recognition'
           type: string
         organisation:
           description: 'Name of the organisation.'
@@ -7667,7 +8558,7 @@ components:
           type: string
           format: date-time
         result:
-          $ref: '#/components/schemas/Results-write'
+          $ref: '#/components/schemas/Result-write'
     'FormalRecognition:jsonld-read':
       type: object
       description: ''
@@ -7689,10 +8580,10 @@ components:
           type: string
           format: uuid
         name:
-          description: 'Name of the reflection'
+          description: 'Name of the recognition'
           type: string
         description:
-          description: 'Description of the reflection'
+          description: 'Description of the recognition'
           type: string
         organisation:
           description: 'Name of the organisation.'
@@ -7710,7 +8601,7 @@ components:
           type: string
           format: date-time
         result:
-          $ref: '#/components/schemas/Results:jsonld-read'
+          $ref: '#/components/schemas/Result:jsonld-read'
         dateCreated:
           readOnly: true
           description: 'The moment this resource was created'
@@ -7741,10 +8632,10 @@ components:
           readOnly: true
           type: string
         name:
-          description: 'Name of the reflection'
+          description: 'Name of the recognition'
           type: string
         description:
-          description: 'Description of the reflection'
+          description: 'Description of the recognition'
           type: string
         organisation:
           description: 'Name of the organisation.'
@@ -7762,7 +8653,7 @@ components:
           type: string
           format: date-time
         result:
-          $ref: '#/components/schemas/Results:jsonld-write'
+          $ref: '#/components/schemas/Result:jsonld-write'
     Product-read:
       type: object
       description: ''
@@ -7784,7 +8675,7 @@ components:
           description: 'Type of the product'
           type: string
         result:
-          $ref: '#/components/schemas/Results-read'
+          $ref: '#/components/schemas/Result-read'
         activity:
           $ref: '#/components/schemas/Activity-read'
         dateCreated:
@@ -7819,7 +8710,7 @@ components:
           description: 'Type of the product'
           type: string
         result:
-          $ref: '#/components/schemas/Results-write'
+          $ref: '#/components/schemas/Result-write'
         activity:
           $ref: '#/components/schemas/Activity-write'
     'Product:jsonld-read':
@@ -7852,7 +8743,7 @@ components:
           description: 'Type of the product'
           type: string
         result:
-          $ref: '#/components/schemas/Results:jsonld-read'
+          $ref: '#/components/schemas/Result:jsonld-read'
         activity:
           $ref: '#/components/schemas/Activity:jsonld-read'
         dateCreated:
@@ -7896,7 +8787,7 @@ components:
           description: 'Type of the product'
           type: string
         result:
-          $ref: '#/components/schemas/Results:jsonld-write'
+          $ref: '#/components/schemas/Result:jsonld-write'
         activity:
           $ref: '#/components/schemas/Activity:jsonld-write'
     Reflection-read:
@@ -7930,7 +8821,7 @@ components:
             url: 'http://schema.org/url'
           type: string
         result:
-          $ref: '#/components/schemas/Results-read'
+          $ref: '#/components/schemas/Result-read'
         dateCreated:
           readOnly: true
           description: 'The moment this resource was created'
@@ -7971,7 +8862,7 @@ components:
             url: 'http://schema.org/url'
           type: string
         result:
-          $ref: '#/components/schemas/Results-write'
+          $ref: '#/components/schemas/Result-write'
     'Reflection:jsonld-read':
       type: object
       description: ''
@@ -8012,7 +8903,7 @@ components:
             url: 'http://schema.org/url'
           type: string
         result:
-          $ref: '#/components/schemas/Results:jsonld-read'
+          $ref: '#/components/schemas/Result:jsonld-read'
         dateCreated:
           readOnly: true
           description: 'The moment this resource was created'
@@ -8062,13 +8953,93 @@ components:
             url: 'http://schema.org/url'
           type: string
         result:
-          $ref: '#/components/schemas/Results:jsonld-write'
-    Results-read:
+          $ref: '#/components/schemas/Result:jsonld-write'
+    Result-read:
       type: object
-    Results-write:
+      description: ''
+      properties:
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this object'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+          format: uuid
+        name:
+          description: 'Name of the Results'
+          type: string
+        description:
+          description: 'Description of the results'
+          type: string
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product-read'
+        activities:
+          type: array
+          items:
+            $ref: '#/components/schemas/Activity-read'
+        evaluations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Evaluation-read'
+        formalRecognitions:
+          type: array
+          items:
+            $ref: '#/components/schemas/FormalRecognition-read'
+        reflections:
+          type: array
+          items:
+            $ref: '#/components/schemas/Reflection-read'
+        dateCreated:
+          readOnly: true
+          description: 'The moment this resource was created'
+          type: string
+          format: date-time
+        dateModified:
+          readOnly: true
+          description: 'The moment this resource last Modified'
+          type: string
+          format: date-time
+      required:
+        - name
+        - description
+    Result-write:
       type: object
-    'Results:jsonld-read':
+      description: ''
+      required:
+        - name
+        - description
+      properties:
+        name:
+          description: 'Name of the Results'
+          type: string
+        description:
+          description: 'Description of the results'
+          type: string
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product-write'
+        activities:
+          type: array
+          items:
+            $ref: '#/components/schemas/Activity-write'
+        evaluations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Evaluation-write'
+        formalRecognitions:
+          type: array
+          items:
+            $ref: '#/components/schemas/FormalRecognition-write'
+        reflections:
+          type: array
+          items:
+            $ref: '#/components/schemas/Reflection-write'
+    'Result:jsonld-read':
       type: object
+      description: ''
       properties:
         '@context':
           readOnly: true
@@ -8079,8 +9050,58 @@ components:
         '@type':
           readOnly: true
           type: string
-    'Results:jsonld-write':
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this object'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+          format: uuid
+        name:
+          description: 'Name of the Results'
+          type: string
+        description:
+          description: 'Description of the results'
+          type: string
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product:jsonld-read'
+        activities:
+          type: array
+          items:
+            $ref: '#/components/schemas/Activity:jsonld-read'
+        evaluations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Evaluation:jsonld-read'
+        formalRecognitions:
+          type: array
+          items:
+            $ref: '#/components/schemas/FormalRecognition:jsonld-read'
+        reflections:
+          type: array
+          items:
+            $ref: '#/components/schemas/Reflection:jsonld-read'
+        dateCreated:
+          readOnly: true
+          description: 'The moment this resource was created'
+          type: string
+          format: date-time
+        dateModified:
+          readOnly: true
+          description: 'The moment this resource last Modified'
+          type: string
+          format: date-time
+      required:
+        - name
+        - description
+    'Result:jsonld-write':
       type: object
+      description: ''
+      required:
+        - name
+        - description
       properties:
         '@context':
           readOnly: true
@@ -8091,6 +9112,32 @@ components:
         '@type':
           readOnly: true
           type: string
+        name:
+          description: 'Name of the Results'
+          type: string
+        description:
+          description: 'Description of the results'
+          type: string
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product:jsonld-write'
+        activities:
+          type: array
+          items:
+            $ref: '#/components/schemas/Activity:jsonld-write'
+        evaluations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Evaluation:jsonld-write'
+        formalRecognitions:
+          type: array
+          items:
+            $ref: '#/components/schemas/FormalRecognition:jsonld-write'
+        reflections:
+          type: array
+          items:
+            $ref: '#/components/schemas/Reflection:jsonld-write'
 definitions:
   Activity-read:
     properties:
@@ -8117,12 +9164,12 @@ definitions:
       startDate:
         description: 'The date the activity started.'
         type: string
-        example: '2020-05-04 07:51:59'
+        example: '2020-05-04 08:44:50'
         format: date-time
       endDate:
         description: 'The date the activity ended.'
         type: string
-        example: '2020-05-04 07:51:59'
+        example: '2020-05-04 08:44:50'
         format: date-time
       gradeType:
         description: 'Type of the grade E.G the max obtainable points'
@@ -8146,7 +9193,9 @@ definitions:
         description: 'The moment this resource last Modified'
         type: \Datetime
       result: []
-      products: []
+      products:
+        description: 'Products in this activity'
+        type: \ArrayCollection
     required:
       - name
       - description
@@ -8174,12 +9223,12 @@ definitions:
       startDate:
         description: 'The date the activity started.'
         type: string
-        example: '2020-05-04 07:51:59'
+        example: '2020-05-04 08:44:50'
         format: date-time
       endDate:
         description: 'The date the activity ended.'
         type: string
-        example: '2020-05-04 07:51:59'
+        example: '2020-05-04 08:44:50'
         format: date-time
       gradeType:
         description: 'Type of the grade E.G the max obtainable points'
@@ -8197,7 +9246,9 @@ definitions:
         example: 'Information (link) about the reference'
         maxLength: 255
       result: []
-      products: []
+      products:
+        description: 'Products in this activity'
+        type: \ArrayCollection
     required:
       - name
       - description
@@ -8309,12 +9360,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-05-04 07:51:59'
+        example: '2020-05-04 08:44:50'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-05-04 07:51:59'
+        example: '2020-05-04 08:44:50'
     required: []
   AuditTrail-write:
     properties:
@@ -8362,12 +9413,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-05-04 07:51:59'
+        example: '2020-05-04 08:44:50'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-05-04 07:51:59'
+        example: '2020-05-04 08:44:50'
     required: []
   ChangeLog-write:
     properties:
@@ -8448,14 +9499,14 @@ definitions:
         example: e2984465-190a-4562-829e-a8cca81aa35d
         format: uuid
       name:
-        description: 'Name of the reflection'
+        description: 'Name of the recognition'
         type: string
         example: 'reflection name'
         maxLength: 255
       description:
-        description: 'Description of the reflection'
+        description: 'Description of the recognition'
         type: string
-        example: 'description of reflection'
+        example: 'description of the recognition'
         maxLength: 2550
       organisation:
         description: 'Name of the organisation.'
@@ -8465,7 +9516,7 @@ definitions:
       registrationNumber:
         description: 'Registration number of the organisation.'
         type: string
-        example: Conduction
+        example: 'Registration number'
         maxLength: 256
       level:
         description: 'Level of recognition.'
@@ -8475,7 +9526,7 @@ definitions:
       dateReceived:
         description: 'The date you received the recognition.'
         type: string
-        example: '2020-05-04 07:51:59'
+        example: '2020-05-04 08:44:50'
         format: date-time
       dateCreated:
         description: 'The moment this resource was created'
@@ -8490,14 +9541,14 @@ definitions:
   FormalRecognition-write:
     properties:
       name:
-        description: 'Name of the reflection'
+        description: 'Name of the recognition'
         type: string
         example: 'reflection name'
         maxLength: 255
       description:
-        description: 'Description of the reflection'
+        description: 'Description of the recognition'
         type: string
-        example: 'description of reflection'
+        example: 'description of the recognition'
         maxLength: 2550
       organisation:
         description: 'Name of the organisation.'
@@ -8507,7 +9558,7 @@ definitions:
       registrationNumber:
         description: 'Registration number of the organisation.'
         type: string
-        example: Conduction
+        example: 'Registration number'
         maxLength: 256
       level:
         description: 'Level of recognition.'
@@ -8517,7 +9568,7 @@ definitions:
       dateReceived:
         description: 'The date you received the recognition.'
         type: string
-        example: '2020-05-04 07:51:59'
+        example: '2020-05-04 08:44:50'
         format: date-time
       result: []
     required:
@@ -8653,6 +9704,57 @@ definitions:
     required:
       - name
       - description
+  Result-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this object'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      name:
+        description: 'Name of the Results'
+        type: string
+        example: 'reflection name'
+        maxLength: 255
+      description:
+        description: 'Description of the results'
+        type: string
+        example: 'description of the results'
+        maxLength: 2550
+      dateCreated:
+        description: 'The moment this resource was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this resource last Modified'
+        type: \Datetime
+      products: []
+      activities: []
+      evaluations: []
+      formalRecognitions: []
+      reflections: []
+    required:
+      - name
+      - description
+  Result-write:
+    properties:
+      name:
+        description: 'Name of the Results'
+        type: string
+        example: 'reflection name'
+        maxLength: 255
+      description:
+        description: 'Description of the results'
+        type: string
+        example: 'description of the results'
+        maxLength: 2550
+      products: []
+      activities: []
+      evaluations: []
+      formalRecognitions: []
+      reflections: []
+    required:
+      - name
+      - description
 tags:
   -
     name: Activity
@@ -8696,21 +9798,27 @@ tags:
       
       
       
+  -
+    name: Result
+    description: |
+      
+      
+      
 securityDefinitions:
   JWT-Oauth:
     type: oauth2
     authorizationUrl: 'http://petstore.swagger.io/api/oauth/dialog'
     flow: implicit
     scopes:
-      read: 'read right to the Reflection resource'
-      write: 'write right to the Reflection resource'
+      read: 'read right to the Result resource'
+      write: 'write right to the Result resource'
   JWT-Token:
     type: apiKey
     in: header
     name: Authorization
     scopes:
-      read: 'read right to the Reflection resource'
-      write: 'write right to the Reflection resource'
+      read: 'read right to the Result resource'
+      write: 'write right to the Result resource'
 host: irc.zaakonline.nl
 servers:
   -
