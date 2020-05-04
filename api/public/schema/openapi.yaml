@@ -4946,11 +4946,122 @@ paths:
               - asc
               - desc
         -
+          name: 'order[name]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[description]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[status]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[author]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[rights]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[dateCreated]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[dateModified]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'dateCreated[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
           name: id
           in: query
           required: false
           schema:
-            type: integer
+            type: string
         -
           name: 'id[]'
           in: query
@@ -4958,9 +5069,113 @@ paths:
           schema:
             type: array
             items:
-              type: integer
+              type: string
           style: form
           explode: true
+        -
+          name: name
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'name[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: description
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'description[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: status
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'status[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: author
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'author[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: rights
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'rights[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: dateCreated
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: dateModified
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[]'
+          in: query
+          required: false
+          schema:
+            type: string
         -
           name: page
           in: query
@@ -6512,9 +6727,76 @@ components:
     Reflection-read:
       type: object
       description: ''
+      properties:
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this object'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+          format: uuid
+        name:
+          description: 'Name of the activity'
+          type: string
+        description:
+          description: 'Description of the activity'
+          type: string
+        status:
+          description: 'The status of this evaluation.'
+          type: string
+        author:
+          description: 'a contact component person'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        rights:
+          description: 'Who has the rights to see or edit the reflection'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        result:
+          $ref: '#/components/schemas/Results-read'
+        dateCreated:
+          readOnly: true
+          description: 'The moment this resource was created'
+          type: string
+          format: date-time
+        dateModified:
+          readOnly: true
+          description: 'The moment this resource last Modified'
+          type: string
+          format: date-time
+      required:
+        - name
+        - description
     Reflection-write:
       type: object
       description: ''
+      required:
+        - name
+        - description
+      properties:
+        name:
+          description: 'Name of the activity'
+          type: string
+        description:
+          description: 'Description of the activity'
+          type: string
+        status:
+          description: 'The status of this evaluation.'
+          type: string
+        author:
+          description: 'a contact component person'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        rights:
+          description: 'Who has the rights to see or edit the reflection'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        result:
+          $ref: '#/components/schemas/Results-write'
     'Reflection:jsonld-read':
       type: object
       description: ''
@@ -6528,9 +6810,53 @@ components:
         '@type':
           readOnly: true
           type: string
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this object'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+          format: uuid
+        name:
+          description: 'Name of the activity'
+          type: string
+        description:
+          description: 'Description of the activity'
+          type: string
+        status:
+          description: 'The status of this evaluation.'
+          type: string
+        author:
+          description: 'a contact component person'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        rights:
+          description: 'Who has the rights to see or edit the reflection'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        result:
+          $ref: '#/components/schemas/Results:jsonld-read'
+        dateCreated:
+          readOnly: true
+          description: 'The moment this resource was created'
+          type: string
+          format: date-time
+        dateModified:
+          readOnly: true
+          description: 'The moment this resource last Modified'
+          type: string
+          format: date-time
+      required:
+        - name
+        - description
     'Reflection:jsonld-write':
       type: object
       description: ''
+      required:
+        - name
+        - description
       properties:
         '@context':
           readOnly: true
@@ -6541,6 +6867,27 @@ components:
         '@type':
           readOnly: true
           type: string
+        name:
+          description: 'Name of the activity'
+          type: string
+        description:
+          description: 'Description of the activity'
+          type: string
+        status:
+          description: 'The status of this evaluation.'
+          type: string
+        author:
+          description: 'a contact component person'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        rights:
+          description: 'Who has the rights to see or edit the reflection'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        result:
+          $ref: '#/components/schemas/Results:jsonld-write'
     Results-read:
       type: object
     Results-write:
@@ -6595,12 +6942,12 @@ definitions:
       startDate:
         description: 'The date the activity started.'
         type: string
-        example: '2020-05-01 14:05:29'
+        example: '2020-05-04 07:34:05'
         format: date-time
       endDate:
         description: 'The date the activity ended.'
         type: string
-        example: '2020-05-01 14:05:29'
+        example: '2020-05-04 07:34:05'
         format: date-time
       gradeType:
         description: 'Type of the grade E.G the max obtainable points'
@@ -6652,12 +6999,12 @@ definitions:
       startDate:
         description: 'The date the activity started.'
         type: string
-        example: '2020-05-01 14:05:29'
+        example: '2020-05-04 07:34:05'
         format: date-time
       endDate:
         description: 'The date the activity ended.'
         type: string
-        example: '2020-05-01 14:05:29'
+        example: '2020-05-04 07:34:05'
         format: date-time
       gradeType:
         description: 'Type of the grade E.G the max obtainable points'
@@ -6787,12 +7134,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-05-01 14:05:29'
+        example: '2020-05-04 07:34:05'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-05-01 14:05:29'
+        example: '2020-05-04 07:34:05'
     required: []
   AuditTrail-write:
     properties:
@@ -6840,12 +7187,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-05-01 14:05:29'
+        example: '2020-05-04 07:34:05'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-05-01 14:05:29'
+        example: '2020-05-04 07:34:05'
     required: []
   ChangeLog-write:
     properties:
@@ -6975,6 +7322,79 @@ definitions:
       - name
       - description
       - type
+  Reflection-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this object'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      name:
+        description: 'Name of the activity'
+        type: string
+        example: 'activity name'
+        maxLength: 255
+      description:
+        description: 'Description of the activity'
+        type: string
+        example: 'description of activity'
+        maxLength: 2550
+      status:
+        description: 'The status of this evaluation.'
+        type: string
+        example: definitive
+        maxLength: 255
+      author:
+        description: 'a contact component person'
+        type: string
+        example: 'https://cc.zaakonline.nl/people/e2984465-190a-4562-829e-a8cca81aa35d'
+        format: url
+      rights:
+        description: 'Who has the rights to see or edit the reflection'
+        type: string
+        example: 'https://cc.zaakonline.nl/people/e2984465-190a-4562-829e-a8cca81aa35d'
+        format: url
+      dateCreated:
+        description: 'The moment this resource was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this resource last Modified'
+        type: \Datetime
+      result: []
+    required:
+      - name
+      - description
+  Reflection-write:
+    properties:
+      name:
+        description: 'Name of the activity'
+        type: string
+        example: 'activity name'
+        maxLength: 255
+      description:
+        description: 'Description of the activity'
+        type: string
+        example: 'description of activity'
+        maxLength: 2550
+      status:
+        description: 'The status of this evaluation.'
+        type: string
+        example: definitive
+        maxLength: 255
+      author:
+        description: 'a contact component person'
+        type: string
+        example: 'https://cc.zaakonline.nl/people/e2984465-190a-4562-829e-a8cca81aa35d'
+        format: url
+      rights:
+        description: 'Who has the rights to see or edit the reflection'
+        type: string
+        example: 'https://cc.zaakonline.nl/people/e2984465-190a-4562-829e-a8cca81aa35d'
+        format: url
+      result: []
+    required:
+      - name
+      - description
 tags:
   -
     name: Activity
@@ -7018,15 +7438,15 @@ securityDefinitions:
     authorizationUrl: 'http://petstore.swagger.io/api/oauth/dialog'
     flow: implicit
     scopes:
-      read: 'read right to the Product resource'
-      write: 'write right to the Product resource'
+      read: 'read right to the Reflection resource'
+      write: 'write right to the Reflection resource'
   JWT-Token:
     type: apiKey
     in: header
     name: Authorization
     scopes:
-      read: 'read right to the Product resource'
-      write: 'write right to the Product resource'
+      read: 'read right to the Reflection resource'
+      write: 'write right to the Reflection resource'
 host: irc.zaakonline.nl
 servers:
   -
