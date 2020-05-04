@@ -248,7 +248,7 @@ class Activity
         if ($this->products->contains($product)) {
             $this->products->removeElement($product);
             // set the owning side to null (unless already changed)
-            if ($product->getActivity() === $this) {
+            if ($product->setActivity() === $this) {
                 $product->setActivity(null);
             }
         }
