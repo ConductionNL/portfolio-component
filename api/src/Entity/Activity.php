@@ -297,7 +297,7 @@ class Activity
         return $this->startDate;
     }
 
-    public function setStartDated(\DateTimeInterface $startDate): self
+    public function setStartDate(\DateTimeInterface $startDate): self
     {
         $this->startDate= $startDate;
 
