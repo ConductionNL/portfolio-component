@@ -109,7 +109,7 @@ class Reflection
 
     /**
      * @Groups({"read","write"})
-     * @ORM\ManyToOne(targetEntity="App\Entity\Results", inversedBy="reflections")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Result", inversedBy="reflections")
      * @MaxDepth(1)
      */
     private $result;

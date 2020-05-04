@@ -64,7 +64,7 @@ class FormalRecognition
     /**
      * @var string Description of the recognition
      *
-     * @example description of reflection6
+     * @example description of the recognition
      * @Groups({"read", "write"})
      * @ORM\Column(type="string", length=2550)
      * @Assert\Length(
@@ -122,7 +122,7 @@ class FormalRecognition
 
     /**
      * @Groups({"read","write"})
-     * @ORM\ManyToOne(targetEntity="App\Entity\Results", inversedBy="formalrecognitions")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Result", inversedBy="formalrecognitions")
      * @MaxDepth(1)
      */
     private $result;

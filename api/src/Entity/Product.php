@@ -90,7 +90,7 @@ class Product
 
     /**
      * @Groups({"read","write"})
-     * @ORM\ManyToOne(targetEntity="App\Entity\Results", inversedBy="products")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Result", inversedBy="products")
      * @MaxDepth(1)
      */
     private $result;

@@ -99,7 +99,7 @@ class Evaluation
 
     /**
      * @Groups({"read","write"})
-     * @ORM\ManyToOne(targetEntity="App\Entity\Results", inversedBy="evaluations")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Result", inversedBy="evaluations")
      * @MaxDepth(1)
      */
     private $result;

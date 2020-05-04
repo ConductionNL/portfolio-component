@@ -25,7 +25,7 @@ use Ramsey\Uuid\UuidInterface;
  *
  * )
  *
- * @ORM\Entity(repositoryClass="App\Repository\ActivityRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ResultsRepository")
  * @Gedmo\Loggable(logEntryClass="App\Entity\ChangeLog")
  *
  * @ApiFilter(BooleanFilter::class)
@@ -33,7 +33,7 @@ use Ramsey\Uuid\UuidInterface;
  * @ApiFilter(DateFilter::class, strategy=DateFilter::EXCLUDE_NULL)
  * @ApiFilter(SearchFilter::class)
  */
-class Activity
+class Result
 {
     /**
      * @var UuidInterface The UUID identifier of this object
@@ -50,9 +50,9 @@ class Activity
     private $id;
 
     /**
-     * @var string Name of the activity
+     * @var string Name of the Results
      *
-     * @example activity name
+     * @example reflection name
      * @Groups({"read", "write"})
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(
@@ -63,9 +63,9 @@ class Activity
     private $name;
 
     /**
-     * @var string Description of the activity
+     * @var string Description of the results
      *
-     * @example description of activity
+     * @example description of the results
      * @Groups({"read", "write"})
      * @ORM\Column(type="string", length=2550)
      * @Assert\Length(
@@ -76,91 +76,39 @@ class Activity
     private $description;
 
     /**
-     * @var string Type of the activity
-     *
-     * @example internship
-     * @Groups({"read", "write"})
-     * @ORM\Column(type="string", length=255)
-     * @Assert\Length(
-     *     max = 255
-     * )
-     * @Assert\NotNull
-     */
-    private $type;
-
-    /**
-     * @var DateTime The date the activity started.
-     * @example 10-02-2019
-     *
-     * @Assert\DateTime
      * @Groups({"read","write"})
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $startDate;
-
-    /**
-     * @var DateTime The date the activity ended.
-     * @example 10-12-2019
-     *
-     * @Assert\DateTime
-     * @Groups({"read","write"})
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $endDate;
-
-    /**
-     * @var string Type of the grade E.G the max obtainable points
-     *
-     * @example points
-     * @Groups({"read", "write"})
-     * @ORM\Column(type="string", length=255)
-     * @Assert\Length(
-     *     max = 255
-     * )
-     * @Assert\NotNull
-     */
-    private $gradeType;
-
-    /**
-     * @var string Evaluation / score of the activity
-     *
-     * @example 8.5
-     * @Groups({"read", "write"})
-     * @ORM\Column(type="string", length=255)
-     * @Assert\Length(
-     *     max = 255
-     * )
-     * @Assert\NotNull
-     */
-    private $evaluation;
-
-    /**
-     * @var string reference for the activity
-     *
-     * @example Information (link) about the reference
-     * @Groups({"read", "write"})
-     * @ORM\Column(type="string", length=255)
-     * @Assert\Length(
-     *     max = 255
-     * )
-     * @Assert\NotNull
-     */
-    private $reference;
-
-    /**
-     * @Groups({"read","write"})
-     * @ORM\ManyToOne(targetEntity="App\Entity\Result", inversedBy="activities")
-     * @MaxDepth(1)
-     */
-    private $result;
-
-    /**
-     * @var ArrayCollection Products in this activity
-     * @Groups({"read","write"})
-     * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="activity")
+     * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="result")
      * @MaxDepth(1)
      */
     private $products;
+
+    /**
+     * @Groups({"read","write"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Activity", mappedBy="result")
+     * @MaxDepth(1)
+     */
+    private $activities;
+
+    /**
+     * @Groups({"read","write"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Evaluation", mappedBy="result")
+     * @MaxDepth(1)
+     */
+    private $evaluations;
+
+    /**
+     * @Groups({"read","write"})
+     * @ORM\OneToMany(targetEntity="App\Entity\FormalRecognition", mappedBy="result")
+     * @MaxDepth(1)
+     */
+    private $formalrecognitions;
+
+    /**
+     * @Groups({"read","write"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Reflection", mappedBy="result")
+     * @MaxDepth(1)
+     */
+    private $reflections;
 
     /**
      * @var Datetime $dateCreated The moment this resource was created
@@ -183,6 +131,10 @@ class Activity
     public function __construct()
     {
         $this->products = new ArrayCollection();
+        $this->activities = new ArrayCollection();
+        $this->evaluations = new ArrayCollection();
+        $this->formalrecognitions = new ArrayCollection();
+        $this->reflections = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -214,17 +166,7 @@ class Activity
         return $this;
     }
 
-    public function getType(): ?string
-    {
-        return $this->type;
-    }
 
-    public function setType(string $type): self
-    {
-        $this->type = $type;
-
-        return $this;
-    }
 
     /**
      * @return Collection|Product[]
@@ -238,7 +180,7 @@ class Activity
     {
         if (!$this->products->contains($product)) {
             $this->products[] = $product;
-            $product->setActivity($this);
+            $product->setResult($this);
         }
 
         return $this;
@@ -249,85 +191,108 @@ class Activity
         if ($this->products->contains($product)) {
             $this->products->removeElement($product);
             // set the owning side to null (unless already changed)
-            if ($product->setActivity() === $this) {
-                $product->setActivity(null);
+            if ($product->setResult() === $this) {
+                $product->setResult(null);
             }
         }
 
         return $this;
     }
 
-    public function getGradeType(): ?string
+    /**
+     * @return Collection|Activity[]
+     */
+    public function getActivities(): Collection
     {
-        return $this->gradeType;
+        return $this->activities;
     }
 
-    public function setGradeType(string $gradeType): self
+    public function addActivity(Activity $activity): self
     {
-        $this->gradeType = $gradeType;
+        if (!$this->activities->contains($activity)) {
+            $this->activities[] = $activity;
+            $activity->setResult($this);
+        }
 
         return $this;
     }
 
-    public function getEvaluation(): ?string
+    public function removeActivity(Activity $activity): self
     {
-        return $this->evaluation;
-    }
-
-    public function setEvaluation(string $evaluation): self
-    {
-        $this->evaluation = $evaluation;
+        if ($this->activities->contains($activity)) {
+            $this->activities->removeElement($activity);
+            // set the owning side to null (unless already changed)
+            if ($activity->setResult() === $this) {
+                $activity->setResult(null);
+            }
+        }
 
         return $this;
     }
 
-    public function getReference(): ?string
+    /**
+     * @return Collection|Evaluation[]
+     */
+    public function getEvaluations(): Collection
     {
-        return $this->reference;
+        return $this->evaluations;
     }
 
-    public function setReference(string $reference): self
+    public function addEvaluation(Evaluation $evaluation): self
     {
-        $this->reference = $reference;
+        if (!$this->evaluations->contains($evaluation)) {
+            $this->evaluations[] = $evaluation;
+            $evaluation->setResult($this);
+        }
 
         return $this;
     }
 
-    public function getStartDate(): ?\DateTimeInterface
+    public function removeEvaluation(Evaluation $evaluation): self
     {
-        return $this->startDate;
-    }
-
-    public function setStartDate(\DateTimeInterface $startDate): self
-    {
-        $this->startDate= $startDate;
+        if ($this->evaluations->contains($evaluation)) {
+            $this->evaluations->removeElement($evaluation);
+            // set the owning side to null (unless already changed)
+            if ($evaluation->setResult() === $this) {
+                $evaluation->setResult(null);
+            }
+        }
 
         return $this;
     }
 
-    public function getEndDate(): ?\DateTimeInterface
+    /**
+     * @return Collection|FormalRecognition[]
+     */
+    public function getFormalRecognitions(): Collection
     {
-        return $this->endDate;
+        return $this->formalrecognitions;
     }
 
-    public function setEndDate(\DateTimeInterface $endDate): self
+    public function addFormalRecognition(FormalRecognition $formalrecognition): self
     {
-        $this->endDate = $endDate;
+        if (!$this->formalrecognitions->contains($formalrecognition)) {
+            $this->formalrecognitions[] = $formalrecognition;
+            $formalrecognition->setResult($this);
+        }
 
         return $this;
     }
 
-    public function getResult(): ?result
+    public function removeFormalRecognition(FormalRecognition $formalRecognition): self
     {
-        return $this->result;
-    }
-
-    public function setResult(?result $result): self
-    {
-        $this->result = $result;
+        if ($this->formalrecognitions->contains($formalRecognition)) {
+            $this->formalrecognitions->removeElement($formalRecognition);
+            // set the owning side to null (unless already changed)
+            if ($formalRecognition->setResult() === $this) {
+                $formalRecognition->setResult(null);
+            }
+        }
 
         return $this;
     }
+
+
 
     public function getDateCreated(): ?\DateTimeInterface
     {
