@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Results;
+use App\Entity\Result;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Results|null find($id, $lockMode = null, $lockVersion = null)
- * @method Results|null findOneBy(array $criteria, array $orderBy = null)
- * @method Results[]    findAll()
- * @method Results[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Result|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Result|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Result[]    findAll()
+ * @method Result[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ResultsRepository extends ServiceEntityRepository
+class ResultRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Results::class);
+        parent::__construct($registry, Result::class);
     }
 
     // /**
-    //  * @return Results[] Returns an array of Results objects
+    //  * @return Result[] Returns an array of Result objects
     //  */
     /*
     public function findByExampleField($value)
@@ -29,7 +29,7 @@ class ResultsRepository extends ServiceEntityRepository
             ->andWhere('r.exampleField = :val')
             ->setParameter('val', $value)
             ->orderBy('r.id', 'ASC')
-            ->setMaxResults(10)
+            ->setMaxResult(10)
             ->getQuery()
             ->getResult()
         ;
@@ -37,7 +37,7 @@ class ResultsRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Results
+    public function findOneBySomeField($value): ?Result
     {
         return $this->createQueryBuilder('r')
             ->andWhere('r.exampleField = :val')
