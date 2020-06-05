@@ -8,8 +8,8 @@ info:
     - Reference: pfc
     - Enviroment: dev
     - Version: V.0.1
-    - Repository: [online](https://github.com/ConductionNL/proto-component) / [zip](https://github.com/ConductionNL/proto-component/archive/master.zip)
-    - Docker Image: [online](https://hub.docker.com/repository/docker/conduction/pc-php) 
+    - Repository: [online](https://github.com/ConductionNL/portfolio-component) / [zip](https://github.com/ConductionNL/portfolio-component/archive/master.zip)
+    - Docker Image: [online](https://hub.docker.com/repository/docker/conduction/pfc-php) 
     - Datamodel: [postman](/schema/pfc.postman_collection.json) / [oas](/schema/openapi.yaml) / [pdf](/schema/datamodel.pdf) / [mwb](/schema/datamodel.mwb) 
     
     'Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.'         
@@ -9164,12 +9164,12 @@ definitions:
       startDate:
         description: 'The date the activity started.'
         type: string
-        example: '2020-05-05 08:25:38'
+        example: '2020-06-04 17:07:06'
         format: date-time
       endDate:
         description: 'The date the activity ended.'
         type: string
-        example: '2020-05-05 08:25:38'
+        example: '2020-06-04 17:07:06'
         format: date-time
       gradeType:
         description: 'Type of the grade E.G the max obtainable points'
@@ -9223,12 +9223,12 @@ definitions:
       startDate:
         description: 'The date the activity started.'
         type: string
-        example: '2020-05-05 08:25:38'
+        example: '2020-06-04 17:07:06'
         format: date-time
       endDate:
         description: 'The date the activity ended.'
         type: string
-        example: '2020-05-05 08:25:38'
+        example: '2020-06-04 17:07:06'
         format: date-time
       gradeType:
         description: 'Type of the grade E.G the max obtainable points'
@@ -9360,12 +9360,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-05-05 08:25:38'
+        example: '2020-06-04 17:07:06'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-05-05 08:25:38'
+        example: '2020-06-04 17:07:06'
     required: []
   AuditTrail-write:
     properties:
@@ -9413,12 +9413,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-05-05 08:25:38'
+        example: '2020-06-04 17:07:06'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-05-05 08:25:38'
+        example: '2020-06-04 17:07:06'
     required: []
   ChangeLog-write:
     properties:
@@ -9526,7 +9526,7 @@ definitions:
       dateReceived:
         description: 'The date you received the recognition.'
         type: string
-        example: '2020-05-05 08:25:38'
+        example: '2020-06-04 17:07:06'
         format: date-time
       dateCreated:
         description: 'The moment this resource was created'
@@ -9568,7 +9568,7 @@ definitions:
       dateReceived:
         description: 'The date you received the recognition.'
         type: string
-        example: '2020-05-05 08:25:38'
+        example: '2020-06-04 17:07:06'
         format: date-time
       result: []
     required:
