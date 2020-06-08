@@ -9164,12 +9164,12 @@ definitions:
       startDate:
         description: 'The date the activity started.'
         type: string
-        example: '2020-06-08 07:13:45'
+        example: '2020-06-08 08:23:39'
         format: date-time
       endDate:
         description: 'The date the activity ended.'
         type: string
-        example: '2020-06-08 07:13:45'
+        example: '2020-06-08 08:23:39'
         format: date-time
       gradeType:
         description: 'Type of the grade E.G the max obtainable points'
@@ -9223,12 +9223,12 @@ definitions:
       startDate:
         description: 'The date the activity started.'
         type: string
-        example: '2020-06-08 07:13:45'
+        example: '2020-06-08 08:23:39'
         format: date-time
       endDate:
         description: 'The date the activity ended.'
         type: string
-        example: '2020-06-08 07:13:45'
+        example: '2020-06-08 08:23:39'
         format: date-time
       gradeType:
         description: 'Type of the grade E.G the max obtainable points'
@@ -9256,6 +9256,386 @@ definitions:
       - gradeType
       - evaluation
       - reference
+  Result-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this object'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      name:
+        description: 'Name of the Results'
+        type: string
+        example: 'Result name'
+        maxLength: 255
+      description:
+        description: 'Description of the results'
+        type: string
+        example: 'description of the results'
+        maxLength: 2550
+      dateCreated:
+        description: 'The moment this resource was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this resource last Modified'
+        type: \Datetime
+      products: []
+      activities: []
+      evaluations: []
+      formalRecognitions: []
+      reflections: []
+    required:
+      - name
+      - description
+  Result-write:
+    properties:
+      name:
+        description: 'Name of the Results'
+        type: string
+        example: 'Result name'
+        maxLength: 255
+      description:
+        description: 'Description of the results'
+        type: string
+        example: 'description of the results'
+        maxLength: 2550
+      products: []
+      activities: []
+      evaluations: []
+      formalRecognitions: []
+      reflections: []
+    required:
+      - name
+      - description
+  Product-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this object'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      name:
+        description: 'Name of the product'
+        type: string
+        example: 'Art and me'
+        maxLength: 255
+      description:
+        description: 'Description of the product'
+        type: string
+        example: 'A painting about my cat'
+        maxLength: 2550
+      type:
+        description: 'Type of the product'
+        type: string
+        example: 'assessed product'
+        maxLength: 255
+      dateCreated:
+        description: 'The moment this resource was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this resource last Modified'
+        type: \Datetime
+      result: []
+      activity: []
+    required:
+      - name
+      - description
+      - type
+  Product-write:
+    properties:
+      name:
+        description: 'Name of the product'
+        type: string
+        example: 'Art and me'
+        maxLength: 255
+      description:
+        description: 'Description of the product'
+        type: string
+        example: 'A painting about my cat'
+        maxLength: 2550
+      type:
+        description: 'Type of the product'
+        type: string
+        example: 'assessed product'
+        maxLength: 255
+      result: []
+      activity: []
+    required:
+      - name
+      - description
+      - type
+  Evaluation-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this object'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      name:
+        description: 'Name of the evaluation'
+        type: string
+        example: 'title of the evaluation'
+        maxLength: 255
+      description:
+        description: 'Description of the evaluation'
+        type: string
+        example: 'a description of the evaluation'
+        maxLength: 2550
+      status:
+        description: 'The status of this evaluation.'
+        type: string
+        example: definitive
+        maxLength: 255
+      assessor:
+        description: 'a contact component person'
+        type: string
+        example: 'https://cc.zaakonline.nl/people/e2984465-190a-4562-829e-a8cca81aa35d'
+        format: url
+      dateCreated:
+        description: 'The moment this resource was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this resource last Modified'
+        type: \Datetime
+      result: []
+    required:
+      - name
+      - description
+  Evaluation-write:
+    properties:
+      name:
+        description: 'Name of the evaluation'
+        type: string
+        example: 'title of the evaluation'
+        maxLength: 255
+      description:
+        description: 'Description of the evaluation'
+        type: string
+        example: 'a description of the evaluation'
+        maxLength: 2550
+      status:
+        description: 'The status of this evaluation.'
+        type: string
+        example: definitive
+        maxLength: 255
+      assessor:
+        description: 'a contact component person'
+        type: string
+        example: 'https://cc.zaakonline.nl/people/e2984465-190a-4562-829e-a8cca81aa35d'
+        format: url
+      result: []
+    required:
+      - name
+      - description
+  FormalRecognition-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this object'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      name:
+        description: 'Name of the recognition'
+        type: string
+        example: 'reflection name'
+        maxLength: 255
+      description:
+        description: 'Description of the recognition'
+        type: string
+        example: 'description of the recognition'
+        maxLength: 2550
+      organisation:
+        description: 'Name of the organisation.'
+        type: string
+        example: Conduction
+        maxLength: 255
+      registrationNumber:
+        description: 'Registration number of the organisation.'
+        type: string
+        example: 'Registration number'
+        maxLength: 256
+      level:
+        description: 'Level of recognition.'
+        type: string
+        example: 'drivers licence'
+        maxLength: 255
+      dateReceived:
+        description: 'The date you received the recognition.'
+        type: string
+        example: '2020-06-08 08:23:39'
+        format: date-time
+      dateCreated:
+        description: 'The moment this resource was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this resource last Modified'
+        type: \Datetime
+      result: []
+    required:
+      - name
+      - description
+  FormalRecognition-write:
+    properties:
+      name:
+        description: 'Name of the recognition'
+        type: string
+        example: 'reflection name'
+        maxLength: 255
+      description:
+        description: 'Description of the recognition'
+        type: string
+        example: 'description of the recognition'
+        maxLength: 2550
+      organisation:
+        description: 'Name of the organisation.'
+        type: string
+        example: Conduction
+        maxLength: 255
+      registrationNumber:
+        description: 'Registration number of the organisation.'
+        type: string
+        example: 'Registration number'
+        maxLength: 256
+      level:
+        description: 'Level of recognition.'
+        type: string
+        example: 'drivers licence'
+        maxLength: 255
+      dateReceived:
+        description: 'The date you received the recognition.'
+        type: string
+        example: '2020-06-08 08:23:39'
+        format: date-time
+      result: []
+    required:
+      - name
+      - description
+  Reflection-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this object'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      name:
+        description: 'Name of the reflection'
+        type: string
+        example: 'reflection name'
+        maxLength: 255
+      description:
+        description: 'Description of the reflection'
+        type: string
+        example: 'description of reflection'
+        maxLength: 2550
+      status:
+        description: 'The status of this reflection.'
+        type: string
+        example: definitive
+        maxLength: 255
+      author:
+        description: 'a contact component person'
+        type: string
+        example: 'https://cc.zaakonline.nl/people/e2984465-190a-4562-829e-a8cca81aa35d'
+        format: url
+      rights:
+        description: 'Who has the rights to see or edit the reflection'
+        type: string
+        example: 'https://cc.zaakonline.nl/people/e2984465-190a-4562-829e-a8cca81aa35d'
+        format: url
+      dateCreated:
+        description: 'The moment this resource was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this resource last Modified'
+        type: \Datetime
+      result: []
+    required:
+      - name
+      - description
+  Reflection-write:
+    properties:
+      name:
+        description: 'Name of the reflection'
+        type: string
+        example: 'reflection name'
+        maxLength: 255
+      description:
+        description: 'Description of the reflection'
+        type: string
+        example: 'description of reflection'
+        maxLength: 2550
+      status:
+        description: 'The status of this reflection.'
+        type: string
+        example: definitive
+        maxLength: 255
+      author:
+        description: 'a contact component person'
+        type: string
+        example: 'https://cc.zaakonline.nl/people/e2984465-190a-4562-829e-a8cca81aa35d'
+        format: url
+      rights:
+        description: 'Who has the rights to see or edit the reflection'
+        type: string
+        example: 'https://cc.zaakonline.nl/people/e2984465-190a-4562-829e-a8cca81aa35d'
+        format: url
+      result: []
+    required:
+      - name
+      - description
+  ChangeLog-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this object'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      note:
+        description: 'A note conserning this log lin'
+        type: string
+        example: 'This log line is suspicius'
+        maxLength: 2555
+      action:
+        description: ''
+        type: string
+      objectId:
+        description: ''
+        type: string
+      objectClass:
+        description: ''
+        type: string
+      version:
+        description: ''
+        type: int
+      data:
+        description: ''
+        type: array
+      username:
+        description: ''
+        type: string
+      session:
+        description: 'The moment this request was created'
+        type: \sting
+        maxLength: 255
+      dateCreated:
+        description: 'The moment this request was created'
+        type: string
+        format: date-time
+        example: '2020-06-08 08:23:39'
+      dateModified:
+        description: 'The moment this request last Modified'
+        type: string
+        format: date-time
+        example: '2020-06-08 08:23:39'
+    required: []
+  ChangeLog-write:
+    properties:
+      note:
+        description: 'A note conserning this log lin'
+        type: string
+        example: 'This log line is suspicius'
+        maxLength: 2555
+    required: []
   AuditTrail-read:
     properties:
       id:
@@ -9360,12 +9740,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-06-08 07:13:45'
+        example: '2020-06-08 08:23:39'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-06-08 07:13:45'
+        example: '2020-06-08 08:23:39'
     required: []
   AuditTrail-write:
     properties:
@@ -9375,386 +9755,6 @@ definitions:
         example: 'This log line looks suspicius'
         maxLength: 2555
     required: []
-  ChangeLog-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this object'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      note:
-        description: 'A note conserning this log lin'
-        type: string
-        example: 'This log line is suspicius'
-        maxLength: 2555
-      action:
-        description: ''
-        type: string
-      objectId:
-        description: ''
-        type: string
-      objectClass:
-        description: ''
-        type: string
-      version:
-        description: ''
-        type: int
-      data:
-        description: ''
-        type: array
-      username:
-        description: ''
-        type: string
-      session:
-        description: 'The moment this request was created'
-        type: \sting
-        maxLength: 255
-      dateCreated:
-        description: 'The moment this request was created'
-        type: string
-        format: date-time
-        example: '2020-06-08 07:13:45'
-      dateModified:
-        description: 'The moment this request last Modified'
-        type: string
-        format: date-time
-        example: '2020-06-08 07:13:45'
-    required: []
-  ChangeLog-write:
-    properties:
-      note:
-        description: 'A note conserning this log lin'
-        type: string
-        example: 'This log line is suspicius'
-        maxLength: 2555
-    required: []
-  Evaluation-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this object'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      name:
-        description: 'Name of the evaluation'
-        type: string
-        example: 'title of the evaluation'
-        maxLength: 255
-      description:
-        description: 'Description of the evaluation'
-        type: string
-        example: 'a description of the evaluation'
-        maxLength: 2550
-      status:
-        description: 'The status of this evaluation.'
-        type: string
-        example: definitive
-        maxLength: 255
-      assessor:
-        description: 'a contact component person'
-        type: string
-        example: 'https://cc.zaakonline.nl/people/e2984465-190a-4562-829e-a8cca81aa35d'
-        format: url
-      dateCreated:
-        description: 'The moment this resource was created'
-        type: \Datetime
-      dateModified:
-        description: 'The moment this resource last Modified'
-        type: \Datetime
-      result: []
-    required:
-      - name
-      - description
-  Evaluation-write:
-    properties:
-      name:
-        description: 'Name of the evaluation'
-        type: string
-        example: 'title of the evaluation'
-        maxLength: 255
-      description:
-        description: 'Description of the evaluation'
-        type: string
-        example: 'a description of the evaluation'
-        maxLength: 2550
-      status:
-        description: 'The status of this evaluation.'
-        type: string
-        example: definitive
-        maxLength: 255
-      assessor:
-        description: 'a contact component person'
-        type: string
-        example: 'https://cc.zaakonline.nl/people/e2984465-190a-4562-829e-a8cca81aa35d'
-        format: url
-      result: []
-    required:
-      - name
-      - description
-  FormalRecognition-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this object'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      name:
-        description: 'Name of the recognition'
-        type: string
-        example: 'reflection name'
-        maxLength: 255
-      description:
-        description: 'Description of the recognition'
-        type: string
-        example: 'description of the recognition'
-        maxLength: 2550
-      organisation:
-        description: 'Name of the organisation.'
-        type: string
-        example: Conduction
-        maxLength: 255
-      registrationNumber:
-        description: 'Registration number of the organisation.'
-        type: string
-        example: 'Registration number'
-        maxLength: 256
-      level:
-        description: 'Level of recognition.'
-        type: string
-        example: 'drivers licence'
-        maxLength: 255
-      dateReceived:
-        description: 'The date you received the recognition.'
-        type: string
-        example: '2020-06-08 07:13:45'
-        format: date-time
-      dateCreated:
-        description: 'The moment this resource was created'
-        type: \Datetime
-      dateModified:
-        description: 'The moment this resource last Modified'
-        type: \Datetime
-      result: []
-    required:
-      - name
-      - description
-  FormalRecognition-write:
-    properties:
-      name:
-        description: 'Name of the recognition'
-        type: string
-        example: 'reflection name'
-        maxLength: 255
-      description:
-        description: 'Description of the recognition'
-        type: string
-        example: 'description of the recognition'
-        maxLength: 2550
-      organisation:
-        description: 'Name of the organisation.'
-        type: string
-        example: Conduction
-        maxLength: 255
-      registrationNumber:
-        description: 'Registration number of the organisation.'
-        type: string
-        example: 'Registration number'
-        maxLength: 256
-      level:
-        description: 'Level of recognition.'
-        type: string
-        example: 'drivers licence'
-        maxLength: 255
-      dateReceived:
-        description: 'The date you received the recognition.'
-        type: string
-        example: '2020-06-08 07:13:45'
-        format: date-time
-      result: []
-    required:
-      - name
-      - description
-  Product-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this object'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      name:
-        description: 'Name of the product'
-        type: string
-        example: 'Art and me'
-        maxLength: 255
-      description:
-        description: 'Description of the product'
-        type: string
-        example: 'A painting about my cat'
-        maxLength: 2550
-      type:
-        description: 'Type of the product'
-        type: string
-        example: 'assessed product'
-        maxLength: 255
-      dateCreated:
-        description: 'The moment this resource was created'
-        type: \Datetime
-      dateModified:
-        description: 'The moment this resource last Modified'
-        type: \Datetime
-      result: []
-      activity: []
-    required:
-      - name
-      - description
-      - type
-  Product-write:
-    properties:
-      name:
-        description: 'Name of the product'
-        type: string
-        example: 'Art and me'
-        maxLength: 255
-      description:
-        description: 'Description of the product'
-        type: string
-        example: 'A painting about my cat'
-        maxLength: 2550
-      type:
-        description: 'Type of the product'
-        type: string
-        example: 'assessed product'
-        maxLength: 255
-      result: []
-      activity: []
-    required:
-      - name
-      - description
-      - type
-  Reflection-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this object'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      name:
-        description: 'Name of the reflection'
-        type: string
-        example: 'reflection name'
-        maxLength: 255
-      description:
-        description: 'Description of the reflection'
-        type: string
-        example: 'description of reflection'
-        maxLength: 2550
-      status:
-        description: 'The status of this reflection.'
-        type: string
-        example: definitive
-        maxLength: 255
-      author:
-        description: 'a contact component person'
-        type: string
-        example: 'https://cc.zaakonline.nl/people/e2984465-190a-4562-829e-a8cca81aa35d'
-        format: url
-      rights:
-        description: 'Who has the rights to see or edit the reflection'
-        type: string
-        example: 'https://cc.zaakonline.nl/people/e2984465-190a-4562-829e-a8cca81aa35d'
-        format: url
-      dateCreated:
-        description: 'The moment this resource was created'
-        type: \Datetime
-      dateModified:
-        description: 'The moment this resource last Modified'
-        type: \Datetime
-      result: []
-    required:
-      - name
-      - description
-  Reflection-write:
-    properties:
-      name:
-        description: 'Name of the reflection'
-        type: string
-        example: 'reflection name'
-        maxLength: 255
-      description:
-        description: 'Description of the reflection'
-        type: string
-        example: 'description of reflection'
-        maxLength: 2550
-      status:
-        description: 'The status of this reflection.'
-        type: string
-        example: definitive
-        maxLength: 255
-      author:
-        description: 'a contact component person'
-        type: string
-        example: 'https://cc.zaakonline.nl/people/e2984465-190a-4562-829e-a8cca81aa35d'
-        format: url
-      rights:
-        description: 'Who has the rights to see or edit the reflection'
-        type: string
-        example: 'https://cc.zaakonline.nl/people/e2984465-190a-4562-829e-a8cca81aa35d'
-        format: url
-      result: []
-    required:
-      - name
-      - description
-  Result-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this object'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      name:
-        description: 'Name of the Results'
-        type: string
-        example: 'Result name'
-        maxLength: 255
-      description:
-        description: 'Description of the results'
-        type: string
-        example: 'description of the results'
-        maxLength: 2550
-      dateCreated:
-        description: 'The moment this resource was created'
-        type: \Datetime
-      dateModified:
-        description: 'The moment this resource last Modified'
-        type: \Datetime
-      products: []
-      activities: []
-      evaluations: []
-      formalRecognitions: []
-      reflections: []
-    required:
-      - name
-      - description
-  Result-write:
-    properties:
-      name:
-        description: 'Name of the Results'
-        type: string
-        example: 'Result name'
-        maxLength: 255
-      description:
-        description: 'Description of the results'
-        type: string
-        example: 'description of the results'
-        maxLength: 2550
-      products: []
-      activities: []
-      evaluations: []
-      formalRecognitions: []
-      reflections: []
-    required:
-      - name
-      - description
 tags:
   -
     name: Activity
@@ -9763,17 +9763,17 @@ tags:
       
       
   -
-    name: AuditTrail
+    name: Result
     description: |
-      An resource representing a log line.
       
-      This entity represents a product that can be ordered via the OrderRegistratieComponent.
+      
+      
   -
-    name: ChangeLog
+    name: Product
     description: |
-      An resource representing a log line.
       
-      This entity represents a product that can be ordered via the OrderRegistratieComponent.
+      
+      
   -
     name: Evaluation
     description: |
@@ -9787,38 +9787,38 @@ tags:
       
       
   -
-    name: Product
-    description: |
-      
-      
-      
-  -
     name: Reflection
     description: |
       
       
       
   -
-    name: Result
+    name: ChangeLog
     description: |
+      An resource representing a log line.
       
+      This entity represents a product that can be ordered via the OrderRegistratieComponent.
+  -
+    name: AuditTrail
+    description: |
+      An resource representing a log line.
       
-      
+      This entity represents a product that can be ordered via the OrderRegistratieComponent.
 securityDefinitions:
   JWT-Oauth:
     type: oauth2
     authorizationUrl: 'http://petstore.swagger.io/api/oauth/dialog'
     flow: implicit
     scopes:
-      read: 'read right to the Result resource'
-      write: 'write right to the Result resource'
+      read: 'read right to the AuditTrail resource'
+      write: 'write right to the AuditTrail resource'
   JWT-Token:
     type: apiKey
     in: header
     name: Authorization
     scopes:
-      read: 'read right to the Result resource'
-      write: 'write right to the Result resource'
+      read: 'read right to the AuditTrail resource'
+      write: 'write right to the AuditTrail resource'
 host: irc.zaakonline.nl
 servers:
   -
