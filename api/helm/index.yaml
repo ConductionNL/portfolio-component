@@ -3,14 +3,14 @@ entries:
   pfc:
   - apiVersion: v1
     appVersion: V.0.1
-    created: "2020-06-08T14:15:21.057989353Z"
+    created: "2020-06-18T10:21:23.12312506Z"
     description: '&#039;Naast deze JSON rest API is er ook een [graphql](/graphql)
       interface beschikbaar.&#039;'
-    digest: bff83a67e8ea822e9e8a3584a680a8b5231c9892bf05e0b4e830a3795c495ba5
+    digest: 55069b1a9c5ba5f0a6f201392f404a0828d9d8057e6ecfc1a5333faadedda0a4
     home: pfc.zaakonline.nl
     icon: pfc.zaakonline.nl
     name: pfc
     urls:
     - pfc-0.1.0.tgz
     version: 0.1.0
-generated: "2020-06-08T14:15:21.003173053Z"
+generated: "2020-06-18T10:21:23.118051358Z"
