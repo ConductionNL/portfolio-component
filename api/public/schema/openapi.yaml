@@ -465,6 +465,15 @@ paths:
             type: integer
             default: 1
         -
+          name: limit
+          in: query
+          required: false
+          description: 'The number of items per page'
+          schema:
+            type: integer
+            default: 30
+            minimum: 0
+        -
           name: Authorization
           description: 'The JWT of the entity performing the request'
           in: header
@@ -1477,6 +1486,15 @@ paths:
             type: integer
             default: 1
         -
+          name: limit
+          in: query
+          required: false
+          description: 'The number of items per page'
+          schema:
+            type: integer
+            default: 30
+            minimum: 0
+        -
           name: Authorization
           description: 'The JWT of the entity performing the request'
           in: header
@@ -2373,6 +2391,15 @@ paths:
           schema:
             type: integer
             default: 1
+        -
+          name: limit
+          in: query
+          required: false
+          description: 'The number of items per page'
+          schema:
+            type: integer
+            default: 30
+            minimum: 0
         -
           name: Authorization
           description: 'The JWT of the entity performing the request'
@@ -3310,6 +3337,15 @@ paths:
           schema:
             type: integer
             default: 1
+        -
+          name: limit
+          in: query
+          required: false
+          description: 'The number of items per page'
+          schema:
+            type: integer
+            default: 30
+            minimum: 0
         -
           name: Authorization
           description: 'The JWT of the entity performing the request'
@@ -4318,6 +4354,15 @@ paths:
             type: integer
             default: 1
         -
+          name: limit
+          in: query
+          required: false
+          description: 'The number of items per page'
+          schema:
+            type: integer
+            default: 30
+            minimum: 0
+        -
           name: Authorization
           description: 'The JWT of the entity performing the request'
           in: header
@@ -5229,6 +5274,15 @@ paths:
           schema:
             type: integer
             default: 1
+        -
+          name: limit
+          in: query
+          required: false
+          description: 'The number of items per page'
+          schema:
+            type: integer
+            default: 30
+            minimum: 0
         -
           name: Authorization
           description: 'The JWT of the entity performing the request'
@@ -6192,6 +6246,15 @@ paths:
             type: integer
             default: 1
         -
+          name: limit
+          in: query
+          required: false
+          description: 'The number of items per page'
+          schema:
+            type: integer
+            default: 30
+            minimum: 0
+        -
           name: Authorization
           description: 'The JWT of the entity performing the request'
           in: header
@@ -7078,6 +7141,15 @@ paths:
           schema:
             type: integer
             default: 1
+        -
+          name: limit
+          in: query
+          required: false
+          description: 'The number of items per page'
+          schema:
+            type: integer
+            default: 30
+            minimum: 0
         -
           name: Authorization
           description: 'The JWT of the entity performing the request'
@@ -9272,12 +9344,12 @@ definitions:
       startDate:
         description: 'The date the activity started.'
         type: string
-        example: '2020-06-08 14:16:11'
+        example: '2020-06-18 10:22:11'
         format: date-time
       endDate:
         description: 'The date the activity ended.'
         type: string
-        example: '2020-06-08 14:16:11'
+        example: '2020-06-18 10:22:11'
         format: date-time
       gradeType:
         description: 'Type of the grade E.G the max obtainable points'
@@ -9331,12 +9403,12 @@ definitions:
       startDate:
         description: 'The date the activity started.'
         type: string
-        example: '2020-06-08 14:16:11'
+        example: '2020-06-18 10:22:11'
         format: date-time
       endDate:
         description: 'The date the activity ended.'
         type: string
-        example: '2020-06-08 14:16:11'
+        example: '2020-06-18 10:22:11'
         format: date-time
       gradeType:
         description: 'Type of the grade E.G the max obtainable points'
@@ -9364,6 +9436,114 @@ definitions:
       - gradeType
       - evaluation
       - reference
+  Result-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this object'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      name:
+        description: 'Name of the Results'
+        type: string
+        example: 'Result name'
+        maxLength: 255
+      description:
+        description: 'Description of the results'
+        type: string
+        example: 'description of the results'
+        maxLength: 2550
+      dateCreated:
+        description: 'The moment this resource was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this resource last Modified'
+        type: \Datetime
+      products: []
+      activities: []
+      evaluations: []
+      formalRecognitions: []
+      reflections: []
+    required:
+      - name
+      - description
+  Result-write:
+    properties:
+      name:
+        description: 'Name of the Results'
+        type: string
+        example: 'Result name'
+        maxLength: 255
+      description:
+        description: 'Description of the results'
+        type: string
+        example: 'description of the results'
+        maxLength: 2550
+      products: []
+      activities: []
+      evaluations: []
+      formalRecognitions: []
+      reflections: []
+    required:
+      - name
+      - description
+  Product-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this object'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      name:
+        description: 'Name of the product'
+        type: string
+        example: 'Art and me'
+        maxLength: 255
+      description:
+        description: 'Description of the product'
+        type: string
+        example: 'A painting about my cat'
+        maxLength: 2550
+      type:
+        description: 'Type of the product'
+        type: string
+        example: 'assessed product'
+        maxLength: 255
+      dateCreated:
+        description: 'The moment this resource was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this resource last Modified'
+        type: \Datetime
+      result: []
+      activity: []
+    required:
+      - name
+      - description
+      - type
+  Product-write:
+    properties:
+      name:
+        description: 'Name of the product'
+        type: string
+        example: 'Art and me'
+        maxLength: 255
+      description:
+        description: 'Description of the product'
+        type: string
+        example: 'A painting about my cat'
+        maxLength: 2550
+      type:
+        description: 'Type of the product'
+        type: string
+        example: 'assessed product'
+        maxLength: 255
+      result: []
+      activity: []
+    required:
+      - name
+      - description
+      - type
   Evaluation-read:
     properties:
       id:
@@ -9462,7 +9642,7 @@ definitions:
       dateReceived:
         description: 'The date you received the recognition.'
         type: string
-        example: '2020-06-08 14:16:11'
+        example: '2020-06-18 10:22:11'
         format: date-time
       dateCreated:
         description: 'The moment this resource was created'
@@ -9504,69 +9684,12 @@ definitions:
       dateReceived:
         description: 'The date you received the recognition.'
         type: string
-        example: '2020-06-08 14:16:11'
+        example: '2020-06-18 10:22:11'
         format: date-time
       result: []
     required:
       - name
       - description
-  Product-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this object'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      name:
-        description: 'Name of the product'
-        type: string
-        example: 'Art and me'
-        maxLength: 255
-      description:
-        description: 'Description of the product'
-        type: string
-        example: 'A painting about my cat'
-        maxLength: 2550
-      type:
-        description: 'Type of the product'
-        type: string
-        example: 'assessed product'
-        maxLength: 255
-      dateCreated:
-        description: 'The moment this resource was created'
-        type: \Datetime
-      dateModified:
-        description: 'The moment this resource last Modified'
-        type: \Datetime
-      result: []
-      activity: []
-    required:
-      - name
-      - description
-      - type
-  Product-write:
-    properties:
-      name:
-        description: 'Name of the product'
-        type: string
-        example: 'Art and me'
-        maxLength: 255
-      description:
-        description: 'Description of the product'
-        type: string
-        example: 'A painting about my cat'
-        maxLength: 2550
-      type:
-        description: 'Type of the product'
-        type: string
-        example: 'assessed product'
-        maxLength: 255
-      result: []
-      activity: []
-    required:
-      - name
-      - description
-      - type
   Reflection-read:
     properties:
       id:
@@ -9640,57 +9763,59 @@ definitions:
     required:
       - name
       - description
-  Result-read:
+  ChangeLog-read:
     properties:
       id:
         description: 'The UUID identifier of this object'
         type: string
         example: e2984465-190a-4562-829e-a8cca81aa35d
         format: uuid
-      name:
-        description: 'Name of the Results'
+      note:
+        description: 'A note conserning this log lin'
         type: string
-        example: 'Result name'
+        example: 'This log line is suspicius'
+        maxLength: 2555
+      action:
+        description: ''
+        type: string
+      objectId:
+        description: ''
+        type: string
+      objectClass:
+        description: ''
+        type: string
+      version:
+        description: ''
+        type: int
+      data:
+        description: ''
+        type: array
+      username:
+        description: ''
+        type: string
+      session:
+        description: 'The moment this request was created'
+        type: string
         maxLength: 255
-      description:
-        description: 'Description of the results'
-        type: string
-        example: 'description of the results'
-        maxLength: 2550
       dateCreated:
-        description: 'The moment this resource was created'
-        type: \Datetime
+        description: 'The moment this request was created'
+        type: string
+        format: date-time
+        example: '2020-06-18 10:22:11'
       dateModified:
-        description: 'The moment this resource last Modified'
-        type: \Datetime
-      products: []
-      activities: []
-      evaluations: []
-      formalRecognitions: []
-      reflections: []
-    required:
-      - name
-      - description
-  Result-write:
+        description: 'The moment this request last Modified'
+        type: string
+        format: date-time
+        example: '2020-06-18 10:22:11'
+    required: []
+  ChangeLog-write:
     properties:
-      name:
-        description: 'Name of the Results'
+      note:
+        description: 'A note conserning this log lin'
         type: string
-        example: 'Result name'
-        maxLength: 255
-      description:
-        description: 'Description of the results'
-        type: string
-        example: 'description of the results'
-        maxLength: 2550
-      products: []
-      activities: []
-      evaluations: []
-      formalRecognitions: []
-      reflections: []
-    required:
-      - name
-      - description
+        example: 'This log line is suspicius'
+        maxLength: 2555
+    required: []
   AuditTrail-read:
     properties:
       id:
@@ -9795,12 +9920,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-06-08 14:16:11'
+        example: '2020-06-18 10:22:11'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-06-08 14:16:11'
+        example: '2020-06-18 10:22:11'
     required: []
   AuditTrail-write:
     properties:
@@ -9810,62 +9935,21 @@ definitions:
         example: 'This log line looks suspicius'
         maxLength: 2555
     required: []
-  ChangeLog-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this object'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      note:
-        description: 'A note conserning this log lin'
-        type: string
-        example: 'This log line is suspicius'
-        maxLength: 2555
-      action:
-        description: ''
-        type: string
-      objectId:
-        description: ''
-        type: string
-      objectClass:
-        description: ''
-        type: string
-      version:
-        description: ''
-        type: int
-      data:
-        description: ''
-        type: array
-      username:
-        description: ''
-        type: string
-      session:
-        description: 'The moment this request was created'
-        type: string
-        maxLength: 255
-      dateCreated:
-        description: 'The moment this request was created'
-        type: string
-        format: date-time
-        example: '2020-06-08 14:16:11'
-      dateModified:
-        description: 'The moment this request last Modified'
-        type: string
-        format: date-time
-        example: '2020-06-08 14:16:11'
-    required: []
-  ChangeLog-write:
-    properties:
-      note:
-        description: 'A note conserning this log lin'
-        type: string
-        example: 'This log line is suspicius'
-        maxLength: 2555
-    required: []
 tags:
   -
     name: Activity
+    description: |
+      
+      
+      
+  -
+    name: Result
+    description: |
+      
+      
+      
+  -
+    name: Product
     description: |
       
       
@@ -9883,31 +9967,19 @@ tags:
       
       
   -
-    name: Product
-    description: |
-      
-      
-      
-  -
     name: Reflection
     description: |
       
       
       
   -
-    name: Result
-    description: |
-      
-      
-      
-  -
-    name: AuditTrail
+    name: ChangeLog
     description: |
       An resource representing a log line.
       
       This entity represents a product that can be ordered via the OrderRegistratieComponent.
   -
-    name: ChangeLog
+    name: AuditTrail
     description: |
       An resource representing a log line.
       
@@ -9918,15 +9990,15 @@ securityDefinitions:
     authorizationUrl: 'http://petstore.swagger.io/api/oauth/dialog'
     flow: implicit
     scopes:
-      read: 'read right to the ChangeLog resource'
-      write: 'write right to the ChangeLog resource'
+      read: 'read right to the AuditTrail resource'
+      write: 'write right to the AuditTrail resource'
   JWT-Token:
     type: apiKey
     in: header
     name: Authorization
     scopes:
-      read: 'read right to the ChangeLog resource'
-      write: 'write right to the ChangeLog resource'
+      read: 'read right to the AuditTrail resource'
+      write: 'write right to the AuditTrail resource'
 host: irc.zaakonline.nl
 servers:
   -

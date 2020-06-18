@@ -14,7 +14,7 @@ settings:
   repro: https://github.com/ConductionNL/portfolio-component
   demo: pfc.zaakonline.nl
   container: https://hub.docker.com/repository/docker/conduction/pfc-php
-  domain: conduction.nl
+  domain: dev
   subdomain: pfc
   organisationName: Conduction
   email: info@conduction.nl
