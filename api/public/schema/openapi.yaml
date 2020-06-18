@@ -9272,12 +9272,12 @@ definitions:
       startDate:
         description: 'The date the activity started.'
         type: string
-        example: '2020-06-08 12:38:12'
+        example: '2020-06-08 14:16:11'
         format: date-time
       endDate:
         description: 'The date the activity ended.'
         type: string
-        example: '2020-06-08 12:38:12'
+        example: '2020-06-08 14:16:11'
         format: date-time
       gradeType:
         description: 'Type of the grade E.G the max obtainable points'
@@ -9331,12 +9331,12 @@ definitions:
       startDate:
         description: 'The date the activity started.'
         type: string
-        example: '2020-06-08 12:38:12'
+        example: '2020-06-08 14:16:11'
         format: date-time
       endDate:
         description: 'The date the activity ended.'
         type: string
-        example: '2020-06-08 12:38:12'
+        example: '2020-06-08 14:16:11'
         format: date-time
       gradeType:
         description: 'Type of the grade E.G the max obtainable points'
@@ -9462,7 +9462,7 @@ definitions:
       dateReceived:
         description: 'The date you received the recognition.'
         type: string
-        example: '2020-06-08 12:38:12'
+        example: '2020-06-08 14:16:11'
         format: date-time
       dateCreated:
         description: 'The moment this resource was created'
@@ -9504,7 +9504,7 @@ definitions:
       dateReceived:
         description: 'The date you received the recognition.'
         type: string
-        example: '2020-06-08 12:38:12'
+        example: '2020-06-08 14:16:11'
         format: date-time
       result: []
     required:
@@ -9795,12 +9795,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-06-08 12:38:12'
+        example: '2020-06-08 14:16:11'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-06-08 12:38:12'
+        example: '2020-06-08 14:16:11'
     required: []
   AuditTrail-write:
     properties:
@@ -9848,12 +9848,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-06-08 12:38:12'
+        example: '2020-06-08 14:16:11'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-06-08 12:38:12'
+        example: '2020-06-08 14:16:11'
     required: []
   ChangeLog-write:
     properties:
