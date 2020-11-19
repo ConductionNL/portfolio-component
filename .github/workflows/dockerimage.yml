@@ -12,9 +12,9 @@ on:
             - staging
             - development
     ​
-jobs:
+#jobs:
     ​
-build:
+#build:
     ​
 runs-on: ubuntu-latest
 steps:
