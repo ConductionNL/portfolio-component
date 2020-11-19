@@ -17,6 +17,8 @@ settings:
   container: https://hub.docker.com/repository/docker/conduction/pfc-php
   domain: conduction.nl
   subdomain: pfc
+  subpath: pfc
+  subpathRouting: false
   organisationName: Conduction
   email: info@conduction.nl
   country: Netherlands

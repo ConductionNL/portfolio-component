@@ -1,13 +1,13 @@
 openapi: 3.0.2
 info:
   title: 'Portfolio Component'
-  version: V.0.1
+  version: V1.0
   description: |
     API Details
     - Component: Portfolio Component
     - Reference: pfc
     - Enviroment: dev
-    - Version: V.0.1
+    - Version: V1.0
     - Repository: [online](https://github.com/ConductionNL/portfolio-component) / [zip](https://github.com/ConductionNL/portfolio-component/archive/master.zip)
     - Docker Image: [online](https://hub.docker.com/repository/docker/conduction/pfc-php) 
     - Datamodel: [postman](/schema/pfc.postman_collection.json) / [oas](/schema/openapi.yaml) / [pdf](/schema/datamodel.pdf) / [modelio (zip)](/schema/Datamodel_Modelio.zip) 
@@ -8718,6 +8718,7 @@ components:
         description:
           description: 'Description of the activity'
           type: string
+          nullable: true
         type:
           description: 'Type of the activity'
           type: string
@@ -8766,7 +8767,6 @@ components:
           nullable: true
       required:
         - name
-        - description
         - type
         - gradeType
         - evaluation
@@ -8776,7 +8776,6 @@ components:
       description: ''
       required:
         - name
-        - description
         - type
         - gradeType
         - evaluation
@@ -8788,6 +8787,7 @@ components:
         description:
           description: 'Description of the activity'
           type: string
+          nullable: true
         type:
           description: 'Type of the activity'
           type: string
@@ -8850,6 +8850,7 @@ components:
         description:
           description: 'Description of the activity'
           type: string
+          nullable: true
         type:
           description: 'Type of the activity'
           type: string
@@ -8898,7 +8899,6 @@ components:
           nullable: true
       required:
         - name
-        - description
         - type
         - gradeType
         - evaluation
@@ -8908,7 +8908,6 @@ components:
       description: ''
       required:
         - name
-        - description
         - type
         - gradeType
         - evaluation
@@ -8929,6 +8928,7 @@ components:
         description:
           description: 'Description of the activity'
           type: string
+          nullable: true
         type:
           description: 'Type of the activity'
           type: string
@@ -9372,6 +9372,7 @@ components:
         description:
           description: 'Description of the evaluation'
           type: string
+          nullable: true
         status:
           description: 'The status of this evaluation.'
           type: string
@@ -9399,13 +9400,11 @@ components:
           nullable: true
       required:
         - name
-        - description
     Evaluation-write:
       type: object
       description: ''
       required:
         - name
-        - description
       properties:
         name:
           description: 'Name of the evaluation'
@@ -9413,6 +9412,7 @@ components:
         description:
           description: 'Description of the evaluation'
           type: string
+          nullable: true
         status:
           description: 'The status of this evaluation.'
           type: string
@@ -9454,6 +9454,7 @@ components:
         description:
           description: 'Description of the evaluation'
           type: string
+          nullable: true
         status:
           description: 'The status of this evaluation.'
           type: string
@@ -9481,13 +9482,11 @@ components:
           nullable: true
       required:
         - name
-        - description
     'Evaluation:jsonld-write':
       type: object
       description: ''
       required:
         - name
-        - description
       properties:
         '@context':
           readOnly: true
@@ -9504,6 +9503,7 @@ components:
         description:
           description: 'Description of the evaluation'
           type: string
+          nullable: true
         status:
           description: 'The status of this evaluation.'
           type: string
@@ -9536,6 +9536,7 @@ components:
         description:
           description: 'Description of the recognition'
           type: string
+          nullable: true
         organisation:
           description: 'Name of the organisation.'
           type: string
@@ -9572,13 +9573,11 @@ components:
           nullable: true
       required:
         - name
-        - description
     FormalRecognition-write:
       type: object
       description: ''
       required:
         - name
-        - description
       properties:
         name:
           description: 'Name of the recognition'
@@ -9586,6 +9585,7 @@ components:
         description:
           description: 'Description of the recognition'
           type: string
+          nullable: true
         organisation:
           description: 'Name of the organisation.'
           type: string
@@ -9636,6 +9636,7 @@ components:
         description:
           description: 'Description of the recognition'
           type: string
+          nullable: true
         organisation:
           description: 'Name of the organisation.'
           type: string
@@ -9672,13 +9673,11 @@ components:
           nullable: true
       required:
         - name
-        - description
     'FormalRecognition:jsonld-write':
       type: object
       description: ''
       required:
         - name
-        - description
       properties:
         '@context':
           readOnly: true
@@ -9695,6 +9694,7 @@ components:
         description:
           description: 'Description of the recognition'
           type: string
+          nullable: true
         organisation:
           description: 'Name of the organisation.'
           type: string
@@ -9736,6 +9736,7 @@ components:
         description:
           description: 'Description of the portfolio'
           type: string
+          nullable: true
         dateCreated:
           description: 'The moment this resource was created'
           type: string
@@ -9746,26 +9747,22 @@ components:
           type: string
           format: date-time
           nullable: true
-        result:
-          description: 'the result associated to this portfolio'
-          nullable: true
-          anyOf:
-            -
-              $ref: '#/components/schemas/Result-read'
         owner:
           description: 'The owner where this Portfolio is related too'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Result-read'
       required:
         - name
-        - description
     Portfolio-write:
       type: object
       description: ''
       required:
         - name
-        - description
       properties:
         name:
           description: 'Name of the portfolio'
@@ -9773,17 +9770,16 @@ components:
         description:
           description: 'Description of the portfolio'
           type: string
-        result:
-          description: 'the result associated to this portfolio'
           nullable: true
-          anyOf:
-            -
-              $ref: '#/components/schemas/Result-write'
         owner:
           description: 'The owner where this Portfolio is related too'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Result-write'
     'Portfolio:jsonld-read':
       type: object
       description: ''
@@ -9810,6 +9806,7 @@ components:
         description:
           description: 'Description of the portfolio'
           type: string
+          nullable: true
         dateCreated:
           description: 'The moment this resource was created'
           type: string
@@ -9820,26 +9817,22 @@ components:
           type: string
           format: date-time
           nullable: true
-        result:
-          description: 'the result associated to this portfolio'
-          nullable: true
-          anyOf:
-            -
-              $ref: '#/components/schemas/Result:jsonld-read'
         owner:
           description: 'The owner where this Portfolio is related too'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Result:jsonld-read'
       required:
         - name
-        - description
     'Portfolio:jsonld-write':
       type: object
       description: ''
       required:
         - name
-        - description
       properties:
         '@context':
           readOnly: true
@@ -9856,17 +9849,16 @@ components:
         description:
           description: 'Description of the portfolio'
           type: string
-        result:
-          description: 'the result associated to this portfolio'
           nullable: true
-          anyOf:
-            -
-              $ref: '#/components/schemas/Result:jsonld-write'
         owner:
           description: 'The owner where this Portfolio is related too'
           externalDocs:
             url: 'http://schema.org/url'
           type: string
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Result:jsonld-write'
     Product-read:
       type: object
       description: ''
@@ -9884,6 +9876,7 @@ components:
         description:
           description: 'Description of the product'
           type: string
+          nullable: true
         type:
           description: 'Type of the product'
           type: string
@@ -9909,14 +9902,12 @@ components:
           nullable: true
       required:
         - name
-        - description
         - type
     Product-write:
       type: object
       description: ''
       required:
         - name
-        - description
         - type
       properties:
         name:
@@ -9925,6 +9916,7 @@ components:
         description:
           description: 'Description of the product'
           type: string
+          nullable: true
         type:
           description: 'Type of the product'
           type: string
@@ -9964,6 +9956,7 @@ components:
         description:
           description: 'Description of the product'
           type: string
+          nullable: true
         type:
           description: 'Type of the product'
           type: string
@@ -9989,14 +9982,12 @@ components:
           nullable: true
       required:
         - name
-        - description
         - type
     'Product:jsonld-write':
       type: object
       description: ''
       required:
         - name
-        - description
         - type
       properties:
         '@context':
@@ -10014,6 +10005,7 @@ components:
         description:
           description: 'Description of the product'
           type: string
+          nullable: true
         type:
           description: 'Type of the product'
           type: string
@@ -10041,9 +10033,11 @@ components:
         name:
           description: 'Name of the reflection'
           type: string
+          nullable: true
         description:
           description: 'Description of the reflection'
           type: string
+          nullable: true
         status:
           description: 'The status of this reflection.'
           type: string
@@ -10075,22 +10069,18 @@ components:
           type: string
           format: date-time
           nullable: true
-      required:
-        - name
-        - description
     Reflection-write:
       type: object
       description: ''
-      required:
-        - name
-        - description
       properties:
         name:
           description: 'Name of the reflection'
           type: string
+          nullable: true
         description:
           description: 'Description of the reflection'
           type: string
+          nullable: true
         status:
           description: 'The status of this reflection.'
           type: string
@@ -10135,9 +10125,11 @@ components:
         name:
           description: 'Name of the reflection'
           type: string
+          nullable: true
         description:
           description: 'Description of the reflection'
           type: string
+          nullable: true
         status:
           description: 'The status of this reflection.'
           type: string
@@ -10169,15 +10161,9 @@ components:
           type: string
           format: date-time
           nullable: true
-      required:
-        - name
-        - description
     'Reflection:jsonld-write':
       type: object
       description: ''
-      required:
-        - name
-        - description
       properties:
         '@context':
           readOnly: true
@@ -10191,9 +10177,11 @@ components:
         name:
           description: 'Name of the reflection'
           type: string
+          nullable: true
         description:
           description: 'Description of the reflection'
           type: string
+          nullable: true
         status:
           description: 'The status of this reflection.'
           type: string
@@ -10232,6 +10220,7 @@ components:
         description:
           description: 'Description of the results'
           type: string
+          nullable: true
         products:
           type: array
           items:
@@ -10262,6 +10251,10 @@ components:
           type: string
           format: date-time
           nullable: true
+        portfolios:
+          type: array
+          items:
+            $ref: '#/components/schemas/Portfolio-read'
       required:
         - name
         - description
@@ -10278,6 +10271,7 @@ components:
         description:
           description: 'Description of the results'
           type: string
+          nullable: true
         products:
           type: array
           items:
@@ -10298,6 +10292,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Reflection-write'
+        portfolios:
+          type: array
+          items:
+            $ref: '#/components/schemas/Portfolio-write'
     'Result:jsonld-read':
       type: object
       description: ''
@@ -10324,6 +10322,7 @@ components:
         description:
           description: 'Description of the results'
           type: string
+          nullable: true
         products:
           type: array
           items:
@@ -10354,6 +10353,10 @@ components:
           type: string
           format: date-time
           nullable: true
+        portfolios:
+          type: array
+          items:
+            $ref: '#/components/schemas/Portfolio:jsonld-read'
       required:
         - name
         - description
@@ -10379,6 +10382,7 @@ components:
         description:
           description: 'Description of the results'
           type: string
+          nullable: true
         products:
           type: array
           items:
@@ -10399,6 +10403,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Reflection:jsonld-write'
+        portfolios:
+          type: array
+          items:
+            $ref: '#/components/schemas/Portfolio:jsonld-write'
 definitions:
   Activity-read:
     properties:
@@ -10425,12 +10433,12 @@ definitions:
       startDate:
         description: 'The date the activity started.'
         type: string
-        example: '2020-11-19 12:03:17'
+        example: '2020-11-19 14:59:14'
         format: date-time
       endDate:
         description: 'The date the activity ended.'
         type: string
-        example: '2020-11-19 12:03:17'
+        example: '2020-11-19 14:59:14'
         format: date-time
       gradeType:
         description: 'Type of the grade E.G the max obtainable points'
@@ -10459,7 +10467,6 @@ definitions:
         type: \ArrayCollection
     required:
       - name
-      - description
       - type
       - gradeType
       - evaluation
@@ -10484,12 +10491,12 @@ definitions:
       startDate:
         description: 'The date the activity started.'
         type: string
-        example: '2020-11-19 12:03:17'
+        example: '2020-11-19 14:59:14'
         format: date-time
       endDate:
         description: 'The date the activity ended.'
         type: string
-        example: '2020-11-19 12:03:17'
+        example: '2020-11-19 14:59:14'
         format: date-time
       gradeType:
         description: 'Type of the grade E.G the max obtainable points'
@@ -10512,7 +10519,6 @@ definitions:
         type: \ArrayCollection
     required:
       - name
-      - description
       - type
       - gradeType
       - evaluation
@@ -10553,7 +10559,6 @@ definitions:
       result: []
     required:
       - name
-      - description
   Evaluation-write:
     properties:
       name:
@@ -10579,7 +10584,6 @@ definitions:
       result: []
     required:
       - name
-      - description
   FormalRecognition-read:
     properties:
       id:
@@ -10596,7 +10600,7 @@ definitions:
         description: 'Description of the recognition'
         type: string
         example: 'description of the recognition'
-        maxLength: 2550
+        maxLength: 255
       organisation:
         description: 'Name of the organisation.'
         type: string
@@ -10615,7 +10619,7 @@ definitions:
       dateReceived:
         description: 'The date you received the recognition.'
         type: string
-        example: '2020-11-19 12:03:17'
+        example: '2020-11-19 14:59:14'
         format: date-time
       dateCreated:
         description: 'The moment this resource was created'
@@ -10626,7 +10630,6 @@ definitions:
       result: []
     required:
       - name
-      - description
   FormalRecognition-write:
     properties:
       name:
@@ -10638,7 +10641,7 @@ definitions:
         description: 'Description of the recognition'
         type: string
         example: 'description of the recognition'
-        maxLength: 2550
+        maxLength: 255
       organisation:
         description: 'Name of the organisation.'
         type: string
@@ -10657,12 +10660,11 @@ definitions:
       dateReceived:
         description: 'The date you received the recognition.'
         type: string
-        example: '2020-11-19 12:03:17'
+        example: '2020-11-19 14:59:14'
         format: date-time
       result: []
     required:
       - name
-      - description
   Portfolio-read:
     properties:
       id:
@@ -10692,12 +10694,9 @@ definitions:
         example: 'https://cc.conduction.nl/people'
         maxLength: 255
         format: url
-      result:
-        description: 'the result associated to this portfolio'
-        type: \Result
+      results: []
     required:
       - name
-      - description
   Portfolio-write:
     properties:
       name:
@@ -10716,12 +10715,9 @@ definitions:
         example: 'https://cc.conduction.nl/people'
         maxLength: 255
         format: url
-      result:
-        description: 'the result associated to this portfolio'
-        type: \Result
+      results: []
     required:
       - name
-      - description
   Product-read:
     properties:
       id:
@@ -10738,7 +10734,7 @@ definitions:
         description: 'Description of the product'
         type: string
         example: 'A painting about my cat'
-        maxLength: 2550
+        maxLength: 255
       type:
         description: 'Type of the product'
         type: string
@@ -10754,7 +10750,6 @@ definitions:
       activity: []
     required:
       - name
-      - description
       - type
   Product-write:
     properties:
@@ -10767,7 +10762,7 @@ definitions:
         description: 'Description of the product'
         type: string
         example: 'A painting about my cat'
-        maxLength: 2550
+        maxLength: 255
       type:
         description: 'Type of the product'
         type: string
@@ -10777,7 +10772,6 @@ definitions:
       activity: []
     required:
       - name
-      - description
       - type
   Reflection-read:
     properties:
@@ -10795,7 +10789,7 @@ definitions:
         description: 'Description of the reflection'
         type: string
         example: 'description of reflection'
-        maxLength: 2550
+        maxLength: 255
       status:
         description: 'The status of this reflection.'
         type: string
@@ -10818,9 +10812,7 @@ definitions:
         description: 'The moment this resource last Modified'
         type: \Datetime
       result: []
-    required:
-      - name
-      - description
+    required: []
   Reflection-write:
     properties:
       name:
@@ -10832,7 +10824,7 @@ definitions:
         description: 'Description of the reflection'
         type: string
         example: 'description of reflection'
-        maxLength: 2550
+        maxLength: 255
       status:
         description: 'The status of this reflection.'
         type: string
@@ -10849,9 +10841,7 @@ definitions:
         example: 'https://cc.zaakonline.nl/people/e2984465-190a-4562-829e-a8cca81aa35d'
         format: url
       result: []
-    required:
-      - name
-      - description
+    required: []
   Result-read:
     properties:
       id:
@@ -10868,7 +10858,7 @@ definitions:
         description: 'Description of the results'
         type: string
         example: 'description of the results'
-        maxLength: 2550
+        maxLength: 255
       dateCreated:
         description: 'The moment this resource was created'
         type: \Datetime
@@ -10880,6 +10870,7 @@ definitions:
       evaluations: []
       formalRecognitions: []
       reflections: []
+      portfolios: []
     required:
       - name
       - description
@@ -10894,12 +10885,13 @@ definitions:
         description: 'Description of the results'
         type: string
         example: 'description of the results'
-        maxLength: 2550
+        maxLength: 255
       products: []
       activities: []
       evaluations: []
       formalRecognitions: []
       reflections: []
+      portfolios: []
     required:
       - name
       - description
@@ -11007,12 +10999,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-11-19 12:03:17'
+        example: '2020-11-19 14:59:14'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-11-19 12:03:17'
+        example: '2020-11-19 14:59:14'
     required: []
   AuditTrail-write:
     properties:
@@ -11060,12 +11052,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-11-19 12:03:17'
+        example: '2020-11-19 14:59:14'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-11-19 12:03:17'
+        example: '2020-11-19 14:59:14'
     required: []
   ChangeLog-write:
     properties:

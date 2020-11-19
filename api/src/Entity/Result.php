@@ -17,6 +17,7 @@ use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Validator\Constraints as Assert;
+use DateTime;
 
 /**
  * @ApiResource(
@@ -67,9 +68,9 @@ class Result
      *
      * @example description of the results
      * @Groups({"read", "write"})
-     * @ORM\Column(type="string", length=2550)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Length(
-     *     max = 2550
+     *     max = 255
      * )
      * @Assert\NotNull
      */
@@ -128,6 +129,13 @@ class Result
      */
     private $dateModified;
 
+    /**
+     * @Groups({"read","write"})
+     * @ORM\ManyToMany(targetEntity=Portfolio::class, mappedBy="results")
+     * @MaxDepth(1)
+     */
+    private $portfolios;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
@@ -135,6 +143,7 @@ class Result
         $this->evaluations = new ArrayCollection();
         $this->formalRecognitions = new ArrayCollection();
         $this->reflections = new ArrayCollection();
+        $this->portfolios = new ArrayCollection();
     }
 
     public function getId()
@@ -341,6 +350,34 @@ class Result
     public function setDateModified(\DateTimeInterface $dateModified): self
     {
         $this->dateModified = $dateModified;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Portfolio[]
+     */
+    public function getPortfolios(): Collection
+    {
+        return $this->portfolios;
+    }
+
+    public function addPortfolio(Portfolio $portfolio): self
+    {
+        if (!$this->portfolios->contains($portfolio)) {
+            $this->portfolios[] = $portfolio;
+            $portfolio->addResult($this);
+        }
+
+        return $this;
+    }
+
+    public function removePortfolio(Portfolio $portfolio): self
+    {
+        if ($this->portfolios->contains($portfolio)) {
+            $this->portfolios->removeElement($portfolio);
+            $portfolio->removeResult($this);
+        }
 
         return $this;
     }

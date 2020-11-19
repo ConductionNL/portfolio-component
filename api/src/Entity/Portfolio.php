@@ -8,6 +8,8 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Ramsey\Uuid\Uuid;
@@ -15,6 +17,7 @@ use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Validator\Constraints as Assert;
+use DateTime;
 
 /**
  * @ApiResource(
@@ -65,11 +68,10 @@ class Portfolio
      *
      * @example Description of the portfolio
      * @Groups({"read", "write"})
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Length(
      *     max = 255
      * )
-     * @Assert\NotNull
      */
     private $description;
 
@@ -92,14 +94,6 @@ class Portfolio
     private $dateModified;
 
     /**
-     * @var Result the result associated to this portfolio
-     * @Groups({"read", "write"})
-     * @MaxDepth(1)
-     * @ORM\OneToOne(targetEntity=Result::class, cascade={"persist", "remove"})
-     */
-    private $result;
-
-    /**
      * @var string The owner where this Portfolio is related too
      *
      * @example https://cc.conduction.nl/people
@@ -113,6 +107,18 @@ class Portfolio
      * @ORM\Column(type="string", length=255)
      */
     private $owner;
+
+    /**
+     * @Groups({"read", "write"})
+     * @ORM\ManyToMany(targetEntity=Result::class, inversedBy="portfolios")
+     * @MaxDepth(1)
+     */
+    private $results;
+
+    public function __construct()
+    {
+        $this->results = new ArrayCollection();
+    }
 
     public function getId()
     {
@@ -167,18 +173,6 @@ class Portfolio
         return $this;
     }
 
-    public function getResult(): ?Result
-    {
-        return $this->result;
-    }
-
-    public function setResult(?Result $result): self
-    {
-        $this->result = $result;
-
-        return $this;
-    }
-
     public function getOwner(): ?string
     {
         return $this->owner;
@@ -187,6 +181,32 @@ class Portfolio
     public function setOwner(string $owner): self
     {
         $this->owner = $owner;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Result[]
+     */
+    public function getResults(): Collection
+    {
+        return $this->results;
+    }
+
+    public function addResult(Result $result): self
+    {
+        if (!$this->results->contains($result)) {
+            $this->results[] = $result;
+        }
+
+        return $this;
+    }
+
+    public function removeResult(Result $result): self
+    {
+        if ($this->results->contains($result)) {
+            $this->results->removeElement($result);
+        }
 
         return $this;
     }
