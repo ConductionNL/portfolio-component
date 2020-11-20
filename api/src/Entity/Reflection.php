@@ -52,11 +52,10 @@ class Reflection
      *
      * @example reflection name
      * @Groups({"read", "write"})
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Length(
      *     max = 255
      * )
-     * @Assert\NotNull
      */
     private $name;
 
@@ -65,11 +64,10 @@ class Reflection
      *
      * @example description of reflection
      * @Groups({"read", "write"})
-     * @ORM\Column(type="string", length=2550)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Length(
-     *     max = 2550
+     *     max = 255
      * )
-     * @Assert\NotNull
      */
     private $description;
 

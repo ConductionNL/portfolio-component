@@ -65,11 +65,10 @@ class FormalRecognition
      *
      * @example description of the recognition
      * @Groups({"read", "write"})
-     * @ORM\Column(type="string", length=2550)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Length(
-     *     max = 2550
+     *     max = 255
      * )
-     * @Assert\NotNull
      */
     private $description;
 
