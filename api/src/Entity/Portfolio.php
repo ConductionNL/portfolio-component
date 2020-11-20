@@ -26,7 +26,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * )
  *
- * @ORM\Entity(repositoryClass="App\Repository\ReflectionRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\PortfolioRepository")
  * @Gedmo\Loggable(logEntryClass="Conduction\CommonGroundBundle\Entity\ChangeLog")
  *
  * @ApiFilter(BooleanFilter::class)

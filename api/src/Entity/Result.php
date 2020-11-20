@@ -33,6 +33,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ApiFilter(OrderFilter::class)
  * @ApiFilter(DateFilter::class, strategy=DateFilter::EXCLUDE_NULL)
  * @ApiFilter(SearchFilter::class)
+ * @ORM\Table(name="result_table")
  */
 class Result
 {
@@ -198,7 +199,7 @@ class Result
         if ($this->products->contains($product)) {
             $this->products->removeElement($product);
             // set the owning side to null (unless already changed)
-            if ($product->setResult() === $this) {
+            if ($product->getResult() === $this) {
                 $product->setResult(null);
             }
         }
@@ -229,7 +230,7 @@ class Result
         if ($this->activities->contains($activity)) {
             $this->activities->removeElement($activity);
             // set the owning side to null (unless already changed)
-            if ($activity->setResult() === $this) {
+            if ($activity->getResult() === $this) {
                 $activity->setResult(null);
             }
         }
@@ -260,7 +261,7 @@ class Result
         if ($this->evaluations->contains($evaluation)) {
             $this->evaluations->removeElement($evaluation);
             // set the owning side to null (unless already changed)
-            if ($evaluation->setResult() === $this) {
+            if ($evaluation->getResult() === $this) {
                 $evaluation->setResult(null);
             }
         }
@@ -291,7 +292,7 @@ class Result
         if ($this->formalRecognitions->contains($formalRecognition)) {
             $this->formalRecognitions->removeElement($formalRecognition);
             // set the owning side to null (unless already changed)
-            if ($formalRecognition->setResult() === $this) {
+            if ($formalRecognition->getResult() === $this) {
                 $formalRecognition->setResult(null);
             }
         }
@@ -322,7 +323,7 @@ class Result
         if ($this->reflections->contains($reflection)) {
             $this->reflections->removeElement($reflection);
             // set the owning side to null (unless already changed)
-            if ($reflection->setResult() === $this) {
+            if ($reflection->getResult() === $this) {
                 $reflection->setResult(null);
             }
         }

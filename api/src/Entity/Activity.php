@@ -92,7 +92,6 @@ class Activity
      *
      * @example 10-02-2019
      *
-     * @Assert\DateTime
      * @Groups({"read","write"})
      * @ORM\Column(type="datetime", nullable=true)
      */
@@ -103,7 +102,6 @@ class Activity
      *
      * @example 10-12-2019
      *
-     * @Assert\DateTime
      * @Groups({"read","write"})
      * @ORM\Column(type="datetime", nullable=true)
      */
@@ -250,7 +248,7 @@ class Activity
         if ($this->products->contains($product)) {
             $this->products->removeElement($product);
             // set the owning side to null (unless already changed)
-            if ($product->setActivity() === $this) {
+            if ($product->getActivity() === $this) {
                 $product->setActivity(null);
             }
         }
