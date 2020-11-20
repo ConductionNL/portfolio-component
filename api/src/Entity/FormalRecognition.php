@@ -113,7 +113,6 @@ class FormalRecognition
      *
      * @example 10-02-2019
      *
-     * @Assert\DateTime
      * @Groups({"read","write"})
      * @ORM\Column(type="datetime", nullable=true)
      */

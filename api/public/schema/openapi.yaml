@@ -12,7 +12,7 @@ info:
     - Docker Image: [online](https://hub.docker.com/repository/docker/conduction/pfc-php) 
     - Datamodel: [postman](/schema/pfc.postman_collection.json) / [oas](/schema/openapi.yaml) / [pdf](/schema/datamodel.pdf) / [modelio (zip)](/schema/Datamodel_Modelio.zip) 
     
-    Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.         
+    'Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.'         
     
 paths:
   /activities:
@@ -8724,15 +8724,11 @@ components:
           type: string
         startDate:
           description: 'The date the activity started.'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
           nullable: true
         endDate:
           description: 'The date the activity ended.'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
           nullable: true
@@ -8793,15 +8789,11 @@ components:
           type: string
         startDate:
           description: 'The date the activity started.'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
           nullable: true
         endDate:
           description: 'The date the activity ended.'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
           nullable: true
@@ -8856,15 +8848,11 @@ components:
           type: string
         startDate:
           description: 'The date the activity started.'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
           nullable: true
         endDate:
           description: 'The date the activity ended.'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
           nullable: true
@@ -8934,15 +8922,11 @@ components:
           type: string
         startDate:
           description: 'The date the activity started.'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
           nullable: true
         endDate:
           description: 'The date the activity ended.'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
           nullable: true
@@ -9551,8 +9535,6 @@ components:
           nullable: true
         dateReceived:
           description: 'The date you received the recognition.'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
           nullable: true
@@ -9600,8 +9582,6 @@ components:
           nullable: true
         dateReceived:
           description: 'The date you received the recognition.'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
           nullable: true
@@ -9651,8 +9631,6 @@ components:
           nullable: true
         dateReceived:
           description: 'The date you received the recognition.'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
           nullable: true
@@ -9709,8 +9687,6 @@ components:
           nullable: true
         dateReceived:
           description: 'The date you received the recognition.'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
           nullable: true
@@ -10432,14 +10408,12 @@ definitions:
         maxLength: 255
       startDate:
         description: 'The date the activity started.'
-        type: string
-        example: '2020-11-19 14:59:14'
-        format: date-time
+        type: \DateTime
+        example: 10-02-2019
       endDate:
         description: 'The date the activity ended.'
-        type: string
-        example: '2020-11-19 14:59:14'
-        format: date-time
+        type: \DateTime
+        example: 10-12-2019
       gradeType:
         description: 'Type of the grade E.G the max obtainable points'
         type: string
@@ -10490,14 +10464,12 @@ definitions:
         maxLength: 255
       startDate:
         description: 'The date the activity started.'
-        type: string
-        example: '2020-11-19 14:59:14'
-        format: date-time
+        type: \DateTime
+        example: 10-02-2019
       endDate:
         description: 'The date the activity ended.'
-        type: string
-        example: '2020-11-19 14:59:14'
-        format: date-time
+        type: \DateTime
+        example: 10-12-2019
       gradeType:
         description: 'Type of the grade E.G the max obtainable points'
         type: string
@@ -10618,9 +10590,8 @@ definitions:
         maxLength: 255
       dateReceived:
         description: 'The date you received the recognition.'
-        type: string
-        example: '2020-11-19 14:59:14'
-        format: date-time
+        type: \DateTime
+        example: 10-02-2019
       dateCreated:
         description: 'The moment this resource was created'
         type: \Datetime
@@ -10659,9 +10630,8 @@ definitions:
         maxLength: 255
       dateReceived:
         description: 'The date you received the recognition.'
-        type: string
-        example: '2020-11-19 14:59:14'
-        format: date-time
+        type: \DateTime
+        example: 10-02-2019
       result: []
     required:
       - name
@@ -10999,12 +10969,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-11-19 14:59:14'
+        example: '2020-11-20 14:50:05'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-11-19 14:59:14'
+        example: '2020-11-20 14:50:05'
     required: []
   AuditTrail-write:
     properties:
@@ -11052,12 +11022,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-11-19 14:59:14'
+        example: '2020-11-20 14:50:05'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-11-19 14:59:14'
+        example: '2020-11-20 14:50:05'
     required: []
   ChangeLog-write:
     properties:
