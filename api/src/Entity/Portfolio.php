@@ -115,9 +115,17 @@ class Portfolio
      */
     private $results;
 
+    /**
+     * @Groups({"read", "write"})
+     * @ORM\ManyToMany(targetEntity=Product::class, inversedBy="portfolios")
+     * @MaxDepth(1)
+     */
+    private $products;
+
     public function __construct()
     {
         $this->results = new ArrayCollection();
+        $this->products = new ArrayCollection();
     }
 
     public function getId()
@@ -206,6 +214,32 @@ class Portfolio
     {
         if ($this->results->contains($result)) {
             $this->results->removeElement($result);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Product[]
+     */
+    public function getProducts(): Collection
+    {
+        return $this->products;
+    }
+
+    public function addProduct(Product $product): self
+    {
+        if (!$this->products->contains($product)) {
+            $this->products[] = $product;
+        }
+
+        return $this;
+    }
+
+    public function removeProduct(Product $product): self
+    {
+        if ($this->products->contains($product)) {
+            $this->products->removeElement($product);
         }
 
         return $this;
