@@ -12,7 +12,7 @@ info:
     - Docker Image: [online](https://hub.docker.com/repository/docker/conduction/pfc-php) 
     - Datamodel: [postman](/schema/pfc.postman_collection.json) / [oas](/schema/openapi.yaml) / [pdf](/schema/datamodel.pdf) / [modelio (zip)](/schema/Datamodel_Modelio.zip) 
     
-    'Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.'         
+    Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.         
     
 paths:
   /activities:
@@ -9732,6 +9732,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Result-read'
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product-read'
       required:
         - name
     Portfolio-write:
@@ -9756,6 +9760,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Result-write'
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product-write'
     'Portfolio:jsonld-read':
       type: object
       description: ''
@@ -9802,6 +9810,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Result:jsonld-read'
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product:jsonld-read'
       required:
         - name
     'Portfolio:jsonld-write':
@@ -9835,6 +9847,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Result:jsonld-write'
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product:jsonld-write'
     Product-read:
       type: object
       description: ''
@@ -9876,6 +9892,10 @@ components:
           type: string
           format: date-time
           nullable: true
+        portfolios:
+          type: array
+          items:
+            $ref: '#/components/schemas/Portfolio-read'
       required:
         - name
         - type
@@ -9906,6 +9926,10 @@ components:
           anyOf:
             -
               $ref: '#/components/schemas/Activity-write'
+        portfolios:
+          type: array
+          items:
+            $ref: '#/components/schemas/Portfolio-write'
     'Product:jsonld-read':
       type: object
       description: ''
@@ -9956,6 +9980,10 @@ components:
           type: string
           format: date-time
           nullable: true
+        portfolios:
+          type: array
+          items:
+            $ref: '#/components/schemas/Portfolio:jsonld-read'
       required:
         - name
         - type
@@ -9995,6 +10023,10 @@ components:
           anyOf:
             -
               $ref: '#/components/schemas/Activity:jsonld-write'
+        portfolios:
+          type: array
+          items:
+            $ref: '#/components/schemas/Portfolio:jsonld-write'
     Reflection-read:
       type: object
       description: ''
@@ -10665,6 +10697,7 @@ definitions:
         maxLength: 255
         format: url
       results: []
+      products: []
     required:
       - name
   Portfolio-write:
@@ -10686,6 +10719,7 @@ definitions:
         maxLength: 255
         format: url
       results: []
+      products: []
     required:
       - name
   Product-read:
@@ -10718,6 +10752,7 @@ definitions:
         type: \Datetime
       result: []
       activity: []
+      portfolios: []
     required:
       - name
       - type
@@ -10740,6 +10775,7 @@ definitions:
         maxLength: 255
       result: []
       activity: []
+      portfolios: []
     required:
       - name
       - type
@@ -10969,12 +11005,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-11-20 14:50:05'
+        example: '2020-11-23 15:06:28'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-11-20 14:50:05'
+        example: '2020-11-23 15:06:28'
     required: []
   AuditTrail-write:
     properties:
@@ -11022,12 +11058,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-11-20 14:50:05'
+        example: '2020-11-23 15:06:28'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-11-20 14:50:05'
+        example: '2020-11-23 15:06:28'
     required: []
   ChangeLog-write:
     properties:
