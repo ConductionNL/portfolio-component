@@ -8,6 +8,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -32,6 +33,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ApiFilter(OrderFilter::class)
  * @ApiFilter(DateFilter::class, strategy=DateFilter::EXCLUDE_NULL)
  * @ApiFilter(SearchFilter::class)
+ * @ORM\Table(name="result_table")
  */
 class Result
 {
@@ -67,9 +69,9 @@ class Result
      *
      * @example description of the results
      * @Groups({"read", "write"})
-     * @ORM\Column(type="string", length=2550)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Length(
-     *     max = 2550
+     *     max = 255
      * )
      * @Assert\NotNull
      */
@@ -128,6 +130,13 @@ class Result
      */
     private $dateModified;
 
+    /**
+     * @Groups({"read","write"})
+     * @ORM\ManyToMany(targetEntity=Portfolio::class, mappedBy="results")
+     * @MaxDepth(1)
+     */
+    private $portfolios;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
@@ -135,6 +144,7 @@ class Result
         $this->evaluations = new ArrayCollection();
         $this->formalRecognitions = new ArrayCollection();
         $this->reflections = new ArrayCollection();
+        $this->portfolios = new ArrayCollection();
     }
 
     public function getId()
@@ -189,7 +199,7 @@ class Result
         if ($this->products->contains($product)) {
             $this->products->removeElement($product);
             // set the owning side to null (unless already changed)
-            if ($product->setResult() === $this) {
+            if ($product->getResult() === $this) {
                 $product->setResult(null);
             }
         }
@@ -220,7 +230,7 @@ class Result
         if ($this->activities->contains($activity)) {
             $this->activities->removeElement($activity);
             // set the owning side to null (unless already changed)
-            if ($activity->setResult() === $this) {
+            if ($activity->getResult() === $this) {
                 $activity->setResult(null);
             }
         }
@@ -251,7 +261,7 @@ class Result
         if ($this->evaluations->contains($evaluation)) {
             $this->evaluations->removeElement($evaluation);
             // set the owning side to null (unless already changed)
-            if ($evaluation->setResult() === $this) {
+            if ($evaluation->getResult() === $this) {
                 $evaluation->setResult(null);
             }
         }
@@ -282,7 +292,7 @@ class Result
         if ($this->formalRecognitions->contains($formalRecognition)) {
             $this->formalRecognitions->removeElement($formalRecognition);
             // set the owning side to null (unless already changed)
-            if ($formalRecognition->setResult() === $this) {
+            if ($formalRecognition->getResult() === $this) {
                 $formalRecognition->setResult(null);
             }
         }
@@ -313,7 +323,7 @@ class Result
         if ($this->reflections->contains($reflection)) {
             $this->reflections->removeElement($reflection);
             // set the owning side to null (unless already changed)
-            if ($reflection->setResult() === $this) {
+            if ($reflection->getResult() === $this) {
                 $reflection->setResult(null);
             }
         }
@@ -341,6 +351,34 @@ class Result
     public function setDateModified(\DateTimeInterface $dateModified): self
     {
         $this->dateModified = $dateModified;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Portfolio[]
+     */
+    public function getPortfolios(): Collection
+    {
+        return $this->portfolios;
+    }
+
+    public function addPortfolio(Portfolio $portfolio): self
+    {
+        if (!$this->portfolios->contains($portfolio)) {
+            $this->portfolios[] = $portfolio;
+            $portfolio->addResult($this);
+        }
+
+        return $this;
+    }
+
+    public function removePortfolio(Portfolio $portfolio): self
+    {
+        if ($this->portfolios->contains($portfolio)) {
+            $this->portfolios->removeElement($portfolio);
+            $portfolio->removeResult($this);
+        }
 
         return $this;
     }

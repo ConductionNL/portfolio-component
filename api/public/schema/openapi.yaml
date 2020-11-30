@@ -1,18 +1,18 @@
 openapi: 3.0.2
 info:
   title: 'Portfolio Component'
-  version: V.0.1
+  version: V1.0
   description: |
     API Details
     - Component: Portfolio Component
     - Reference: pfc
     - Enviroment: dev
-    - Version: V.0.1
+    - Version: V1.0
     - Repository: [online](https://github.com/ConductionNL/portfolio-component) / [zip](https://github.com/ConductionNL/portfolio-component/archive/master.zip)
     - Docker Image: [online](https://hub.docker.com/repository/docker/conduction/pfc-php) 
     - Datamodel: [postman](/schema/pfc.postman_collection.json) / [oas](/schema/openapi.yaml) / [pdf](/schema/datamodel.pdf) / [modelio (zip)](/schema/Datamodel_Modelio.zip) 
     
-    'Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.'         
+    Naast deze JSON rest API is er ook een [graphql](/graphql) interface beschikbaar.         
     
 paths:
   /activities:
@@ -4990,6 +4990,927 @@ paths:
             schema:
               $ref: '#/components/schemas/FormalRecognition-write'
         description: 'The updated FormalRecognition resource'
+  /portfolios:
+    get:
+      tags:
+        - Portfolio
+      operationId: getPortfolioCollection
+      summary: 'Retrieves the collection of Portfolio resources.'
+      responses:
+        200:
+          description: 'Portfolio collection response'
+          content:
+            application/ld+json:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Portfolio:jsonld-read' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/json+ld:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Portfolio:jsonld-read' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Portfolio-read'
+            application/json+hal:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Portfolio-read'
+            application/vnd.api+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Portfolio-read'
+            application/json+vnd.api:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Portfolio-read'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Portfolio-read'
+            application/health+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Portfolio-read'
+            application/json+health:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Portfolio-read'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Portfolio-read'
+            application/x-yaml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Portfolio-read'
+            text/csv:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Portfolio-read'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Portfolio-read'
+      parameters:
+        -
+          name: 'order[id]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[name]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[description]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[dateCreated]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[dateModified]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'order[owner]'
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        -
+          name: 'dateCreated[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: id
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'id[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: name
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'name[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: description
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'description[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: dateCreated
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateCreated[]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: dateModified
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'dateModified[]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: owner
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'owner[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: page
+          in: query
+          required: false
+          description: 'The collection page number'
+          schema:
+            type: integer
+            default: 1
+        -
+          name: limit
+          in: query
+          required: false
+          description: 'The number of items per page'
+          schema:
+            type: integer
+            default: 30
+            minimum: 0
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      produces:
+        - application/health+json
+    post:
+      tags:
+        - Portfolio
+      operationId: postPortfolioCollection
+      summary: 'Creates a Portfolio resource.'
+      responses:
+        201:
+          description: 'Portfolio resource created'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Portfolio:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Portfolio:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Portfolio-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Portfolio-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Portfolio-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Portfolio-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Portfolio-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Portfolio-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Portfolio-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Portfolio-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Portfolio-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Portfolio-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Portfolio-read'
+          links:
+            GetPortfolioItem:
+              parameters:
+                id: '$response.body#/id'
+              operationId: getPortfolioItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /portfolios/{id}`.'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Portfolio:jsonld-write'
+          application/json+ld:
+            schema:
+              $ref: '#/components/schemas/Portfolio:jsonld-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Portfolio-write'
+          application/json+hal:
+            schema:
+              $ref: '#/components/schemas/Portfolio-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Portfolio-write'
+          application/json+vnd.api:
+            schema:
+              $ref: '#/components/schemas/Portfolio-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Portfolio-write'
+          application/health+json:
+            schema:
+              $ref: '#/components/schemas/Portfolio-write'
+          application/json+health:
+            schema:
+              $ref: '#/components/schemas/Portfolio-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Portfolio-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Portfolio-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Portfolio-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Portfolio-write'
+        description: 'The new Portfolio resource'
+      parameters:
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+  '/portfolios/{id}':
+    get:
+      tags:
+        - Portfolio
+      operationId: getPortfolioItem
+      summary: 'Retrieves a Portfolio resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+        -
+          name: Link
+          description: 'A [websub](https://www.w3.org/TR/websub/#discovery) header like <https://hub.example.com/>; rel="hub"'
+          in: header
+        -
+          name: 'extend[]'
+          required: false
+          description: 'An array of nested objects to include in the return object'
+          in: query
+          schema:
+            type: array
+        -
+          name: 'fields[]'
+          required: false
+          description: 'An array of fields to return in output, wil return all fields is not supplied'
+          in: query
+          schema:
+            type: array
+        -
+          name: validOn
+          required: false
+          description: 'Returns object as valid on a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validFrom
+          required: false
+          description: 'Returns objects valid from a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+        -
+          name: validUntil
+          required: false
+          description: 'Returns objects valid until a given date time'
+          schema:
+            type: string
+            format: date-time
+          in: query
+      responses:
+        200:
+          description: 'Portfolio resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Portfolio:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Portfolio:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Portfolio-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Portfolio-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Portfolio-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Portfolio-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Portfolio-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Portfolio-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Portfolio-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Portfolio-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Portfolio-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Portfolio-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Portfolio-read'
+        404:
+          description: 'Resource not found'
+      produces:
+        - application/health+json
+    delete:
+      tags:
+        - Portfolio
+      operationId: deletePortfolioItem
+      summary: 'Removes the Portfolio resource.'
+      responses:
+        204:
+          description: 'Portfolio resource deleted'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+    put:
+      tags:
+        - Portfolio
+      operationId: putPortfolioItem
+      summary: 'Replaces the Portfolio resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+      responses:
+        200:
+          description: 'Portfolio resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Portfolio:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Portfolio:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Portfolio-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Portfolio-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Portfolio-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Portfolio-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Portfolio-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Portfolio-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Portfolio-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Portfolio-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Portfolio-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Portfolio-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Portfolio-read'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Portfolio:jsonld-write'
+          application/json+ld:
+            schema:
+              $ref: '#/components/schemas/Portfolio:jsonld-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Portfolio-write'
+          application/json+hal:
+            schema:
+              $ref: '#/components/schemas/Portfolio-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Portfolio-write'
+          application/json+vnd.api:
+            schema:
+              $ref: '#/components/schemas/Portfolio-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Portfolio-write'
+          application/health+json:
+            schema:
+              $ref: '#/components/schemas/Portfolio-write'
+          application/json+health:
+            schema:
+              $ref: '#/components/schemas/Portfolio-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Portfolio-write'
+          application/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Portfolio-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Portfolio-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Portfolio-write'
+        description: 'The updated Portfolio resource'
+    patch:
+      tags:
+        - Portfolio
+      operationId: patchPortfolioItem
+      summary: 'Updates the Portfolio resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: Authorization
+          description: 'The JWT of the entity performing the request'
+          in: header
+        -
+          name: API-Version
+          description: 'The version of the API conform [Landelijke API-strategie.](https://geonovum.github.io/KP-APIs/#versioning)'
+          example: 1.0.1
+          in: header
+        -
+          name: X-NLX-Logrecord-ID
+          description: 'A  globally unique id of the request, which makes a request traceable throughout the network.'
+          in: header
+        -
+          name: X-NLX-Request-Process-Id
+          description: 'A process id for purpose registration (doelbinding)'
+          in: header
+        -
+          name: X-NLX-Request-Data-Elements
+          description: 'A list of requested data elements'
+          in: header
+        -
+          name: X-NLX-Request-Data-Subject
+          description: 'A key-value list of data subjects related to this request. e.g. `bsn=12345678, kenteken=ab-12-fg`'
+          in: header
+        -
+          name: X-NLX-Audit-Clarification
+          description: 'A clarification as to why a request has been made  (doelbinding)'
+          in: header
+      responses:
+        200:
+          description: 'Portfolio resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Portfolio:jsonld-read'
+            application/json+ld:
+              schema:
+                $ref: '#/components/schemas/Portfolio:jsonld-read'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Portfolio-read'
+            application/json+hal:
+              schema:
+                $ref: '#/components/schemas/Portfolio-read'
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Portfolio-read'
+            application/json+vnd.api:
+              schema:
+                $ref: '#/components/schemas/Portfolio-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Portfolio-read'
+            application/health+json:
+              schema:
+                $ref: '#/components/schemas/Portfolio-read'
+            application/json+health:
+              schema:
+                $ref: '#/components/schemas/Portfolio-read'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Portfolio-read'
+            application/x-yaml:
+              schema:
+                $ref: '#/components/schemas/Portfolio-read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Portfolio-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Portfolio-read'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Portfolio:jsonld-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Portfolio-write'
+          application/hal+json:
+            schema:
+              $ref: '#/components/schemas/Portfolio-write'
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Portfolio-write'
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/Portfolio-write'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Portfolio-write'
+          applications/x-yaml:
+            schema:
+              $ref: '#/components/schemas/Portfolio-write'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Portfolio-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Portfolio-write'
+        description: 'The updated Portfolio resource'
   /products:
     get:
       tags:
@@ -7797,20 +8718,17 @@ components:
         description:
           description: 'Description of the activity'
           type: string
+          nullable: true
         type:
           description: 'Type of the activity'
           type: string
         startDate:
           description: 'The date the activity started.'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
           nullable: true
         endDate:
           description: 'The date the activity ended.'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
           nullable: true
@@ -7845,7 +8763,6 @@ components:
           nullable: true
       required:
         - name
-        - description
         - type
         - gradeType
         - evaluation
@@ -7855,7 +8772,6 @@ components:
       description: ''
       required:
         - name
-        - description
         - type
         - gradeType
         - evaluation
@@ -7867,20 +8783,17 @@ components:
         description:
           description: 'Description of the activity'
           type: string
+          nullable: true
         type:
           description: 'Type of the activity'
           type: string
         startDate:
           description: 'The date the activity started.'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
           nullable: true
         endDate:
           description: 'The date the activity ended.'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
           nullable: true
@@ -7929,20 +8842,17 @@ components:
         description:
           description: 'Description of the activity'
           type: string
+          nullable: true
         type:
           description: 'Type of the activity'
           type: string
         startDate:
           description: 'The date the activity started.'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
           nullable: true
         endDate:
           description: 'The date the activity ended.'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
           nullable: true
@@ -7977,7 +8887,6 @@ components:
           nullable: true
       required:
         - name
-        - description
         - type
         - gradeType
         - evaluation
@@ -7987,7 +8896,6 @@ components:
       description: ''
       required:
         - name
-        - description
         - type
         - gradeType
         - evaluation
@@ -8008,20 +8916,17 @@ components:
         description:
           description: 'Description of the activity'
           type: string
+          nullable: true
         type:
           description: 'Type of the activity'
           type: string
         startDate:
           description: 'The date the activity started.'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
           nullable: true
         endDate:
           description: 'The date the activity ended.'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
           nullable: true
@@ -8105,18 +9010,23 @@ components:
         route:
           description: 'The moment this request was created'
           type: string
+          nullable: true
         endpoint:
           description: 'The endpoint that the request was made to'
           type: string
+          nullable: true
         method:
           description: 'The method that was used'
           type: string
+          nullable: true
         accept:
           description: 'The contentType that was reqousted'
           type: string
+          nullable: true
         contentType:
           description: 'The contentType that was suplieds'
           type: string
+          nullable: true
         content:
           description: 'The moment this request was created'
           type: string
@@ -8124,6 +9034,7 @@ components:
         ip:
           description: 'The moment this request was created'
           type: string
+          nullable: true
         session:
           description: 'The moment this request was created'
           type: string
@@ -8235,18 +9146,23 @@ components:
         route:
           description: 'The moment this request was created'
           type: string
+          nullable: true
         endpoint:
           description: 'The endpoint that the request was made to'
           type: string
+          nullable: true
         method:
           description: 'The method that was used'
           type: string
+          nullable: true
         accept:
           description: 'The contentType that was reqousted'
           type: string
+          nullable: true
         contentType:
           description: 'The contentType that was suplieds'
           type: string
+          nullable: true
         content:
           description: 'The moment this request was created'
           type: string
@@ -8254,6 +9170,7 @@ components:
         ip:
           description: 'The moment this request was created'
           type: string
+          nullable: true
         session:
           description: 'The moment this request was created'
           type: string
@@ -8439,6 +9356,7 @@ components:
         description:
           description: 'Description of the evaluation'
           type: string
+          nullable: true
         status:
           description: 'The status of this evaluation.'
           type: string
@@ -8466,13 +9384,11 @@ components:
           nullable: true
       required:
         - name
-        - description
     Evaluation-write:
       type: object
       description: ''
       required:
         - name
-        - description
       properties:
         name:
           description: 'Name of the evaluation'
@@ -8480,6 +9396,7 @@ components:
         description:
           description: 'Description of the evaluation'
           type: string
+          nullable: true
         status:
           description: 'The status of this evaluation.'
           type: string
@@ -8521,6 +9438,7 @@ components:
         description:
           description: 'Description of the evaluation'
           type: string
+          nullable: true
         status:
           description: 'The status of this evaluation.'
           type: string
@@ -8548,13 +9466,11 @@ components:
           nullable: true
       required:
         - name
-        - description
     'Evaluation:jsonld-write':
       type: object
       description: ''
       required:
         - name
-        - description
       properties:
         '@context':
           readOnly: true
@@ -8571,6 +9487,7 @@ components:
         description:
           description: 'Description of the evaluation'
           type: string
+          nullable: true
         status:
           description: 'The status of this evaluation.'
           type: string
@@ -8603,6 +9520,7 @@ components:
         description:
           description: 'Description of the recognition'
           type: string
+          nullable: true
         organisation:
           description: 'Name of the organisation.'
           type: string
@@ -8617,8 +9535,6 @@ components:
           nullable: true
         dateReceived:
           description: 'The date you received the recognition.'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
           nullable: true
@@ -8639,13 +9555,11 @@ components:
           nullable: true
       required:
         - name
-        - description
     FormalRecognition-write:
       type: object
       description: ''
       required:
         - name
-        - description
       properties:
         name:
           description: 'Name of the recognition'
@@ -8653,6 +9567,7 @@ components:
         description:
           description: 'Description of the recognition'
           type: string
+          nullable: true
         organisation:
           description: 'Name of the organisation.'
           type: string
@@ -8667,8 +9582,6 @@ components:
           nullable: true
         dateReceived:
           description: 'The date you received the recognition.'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
           nullable: true
@@ -8703,6 +9616,7 @@ components:
         description:
           description: 'Description of the recognition'
           type: string
+          nullable: true
         organisation:
           description: 'Name of the organisation.'
           type: string
@@ -8717,8 +9631,6 @@ components:
           nullable: true
         dateReceived:
           description: 'The date you received the recognition.'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
           nullable: true
@@ -8739,13 +9651,11 @@ components:
           nullable: true
       required:
         - name
-        - description
     'FormalRecognition:jsonld-write':
       type: object
       description: ''
       required:
         - name
-        - description
       properties:
         '@context':
           readOnly: true
@@ -8762,6 +9672,7 @@ components:
         description:
           description: 'Description of the recognition'
           type: string
+          nullable: true
         organisation:
           description: 'Name of the organisation.'
           type: string
@@ -8776,8 +9687,6 @@ components:
           nullable: true
         dateReceived:
           description: 'The date you received the recognition.'
-          externalDocs:
-            url: 'http://schema.org/DateTime'
           type: string
           format: date-time
           nullable: true
@@ -8786,6 +9695,162 @@ components:
           anyOf:
             -
               $ref: '#/components/schemas/Result:jsonld-write'
+    Portfolio-read:
+      type: object
+      description: ''
+      properties:
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this object'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+          format: uuid
+        name:
+          description: 'Name of the portfolio'
+          type: string
+        description:
+          description: 'Description of the portfolio'
+          type: string
+          nullable: true
+        dateCreated:
+          description: 'The moment this resource was created'
+          type: string
+          format: date-time
+          nullable: true
+        dateModified:
+          description: 'The moment this resource last Modified'
+          type: string
+          format: date-time
+          nullable: true
+        owner:
+          description: 'The owner where this Portfolio is related too'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Result-read'
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product-read'
+      required:
+        - name
+    Portfolio-write:
+      type: object
+      description: ''
+      required:
+        - name
+      properties:
+        name:
+          description: 'Name of the portfolio'
+          type: string
+        description:
+          description: 'Description of the portfolio'
+          type: string
+          nullable: true
+        owner:
+          description: 'The owner where this Portfolio is related too'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Result-write'
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product-write'
+    'Portfolio:jsonld-read':
+      type: object
+      description: ''
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          description: 'The UUID identifier of this object'
+          externalDocs:
+            url: 'http://schema.org/identifier'
+          type: string
+          format: uuid
+        name:
+          description: 'Name of the portfolio'
+          type: string
+        description:
+          description: 'Description of the portfolio'
+          type: string
+          nullable: true
+        dateCreated:
+          description: 'The moment this resource was created'
+          type: string
+          format: date-time
+          nullable: true
+        dateModified:
+          description: 'The moment this resource last Modified'
+          type: string
+          format: date-time
+          nullable: true
+        owner:
+          description: 'The owner where this Portfolio is related too'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Result:jsonld-read'
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product:jsonld-read'
+      required:
+        - name
+    'Portfolio:jsonld-write':
+      type: object
+      description: ''
+      required:
+        - name
+      properties:
+        '@context':
+          readOnly: true
+          type: string
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        name:
+          description: 'Name of the portfolio'
+          type: string
+        description:
+          description: 'Description of the portfolio'
+          type: string
+          nullable: true
+        owner:
+          description: 'The owner where this Portfolio is related too'
+          externalDocs:
+            url: 'http://schema.org/url'
+          type: string
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Result:jsonld-write'
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product:jsonld-write'
     Product-read:
       type: object
       description: ''
@@ -8803,6 +9868,7 @@ components:
         description:
           description: 'Description of the product'
           type: string
+          nullable: true
         type:
           description: 'Type of the product'
           type: string
@@ -8826,16 +9892,18 @@ components:
           type: string
           format: date-time
           nullable: true
+        portfolios:
+          type: array
+          items:
+            $ref: '#/components/schemas/Portfolio-read'
       required:
         - name
-        - description
         - type
     Product-write:
       type: object
       description: ''
       required:
         - name
-        - description
         - type
       properties:
         name:
@@ -8844,6 +9912,7 @@ components:
         description:
           description: 'Description of the product'
           type: string
+          nullable: true
         type:
           description: 'Type of the product'
           type: string
@@ -8857,6 +9926,10 @@ components:
           anyOf:
             -
               $ref: '#/components/schemas/Activity-write'
+        portfolios:
+          type: array
+          items:
+            $ref: '#/components/schemas/Portfolio-write'
     'Product:jsonld-read':
       type: object
       description: ''
@@ -8883,6 +9956,7 @@ components:
         description:
           description: 'Description of the product'
           type: string
+          nullable: true
         type:
           description: 'Type of the product'
           type: string
@@ -8906,16 +9980,18 @@ components:
           type: string
           format: date-time
           nullable: true
+        portfolios:
+          type: array
+          items:
+            $ref: '#/components/schemas/Portfolio:jsonld-read'
       required:
         - name
-        - description
         - type
     'Product:jsonld-write':
       type: object
       description: ''
       required:
         - name
-        - description
         - type
       properties:
         '@context':
@@ -8933,6 +10009,7 @@ components:
         description:
           description: 'Description of the product'
           type: string
+          nullable: true
         type:
           description: 'Type of the product'
           type: string
@@ -8946,6 +10023,10 @@ components:
           anyOf:
             -
               $ref: '#/components/schemas/Activity:jsonld-write'
+        portfolios:
+          type: array
+          items:
+            $ref: '#/components/schemas/Portfolio:jsonld-write'
     Reflection-read:
       type: object
       description: ''
@@ -8960,9 +10041,11 @@ components:
         name:
           description: 'Name of the reflection'
           type: string
+          nullable: true
         description:
           description: 'Description of the reflection'
           type: string
+          nullable: true
         status:
           description: 'The status of this reflection.'
           type: string
@@ -8994,22 +10077,18 @@ components:
           type: string
           format: date-time
           nullable: true
-      required:
-        - name
-        - description
     Reflection-write:
       type: object
       description: ''
-      required:
-        - name
-        - description
       properties:
         name:
           description: 'Name of the reflection'
           type: string
+          nullable: true
         description:
           description: 'Description of the reflection'
           type: string
+          nullable: true
         status:
           description: 'The status of this reflection.'
           type: string
@@ -9054,9 +10133,11 @@ components:
         name:
           description: 'Name of the reflection'
           type: string
+          nullable: true
         description:
           description: 'Description of the reflection'
           type: string
+          nullable: true
         status:
           description: 'The status of this reflection.'
           type: string
@@ -9088,15 +10169,9 @@ components:
           type: string
           format: date-time
           nullable: true
-      required:
-        - name
-        - description
     'Reflection:jsonld-write':
       type: object
       description: ''
-      required:
-        - name
-        - description
       properties:
         '@context':
           readOnly: true
@@ -9110,9 +10185,11 @@ components:
         name:
           description: 'Name of the reflection'
           type: string
+          nullable: true
         description:
           description: 'Description of the reflection'
           type: string
+          nullable: true
         status:
           description: 'The status of this reflection.'
           type: string
@@ -9151,6 +10228,7 @@ components:
         description:
           description: 'Description of the results'
           type: string
+          nullable: true
         products:
           type: array
           items:
@@ -9181,6 +10259,10 @@ components:
           type: string
           format: date-time
           nullable: true
+        portfolios:
+          type: array
+          items:
+            $ref: '#/components/schemas/Portfolio-read'
       required:
         - name
         - description
@@ -9197,6 +10279,7 @@ components:
         description:
           description: 'Description of the results'
           type: string
+          nullable: true
         products:
           type: array
           items:
@@ -9217,6 +10300,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Reflection-write'
+        portfolios:
+          type: array
+          items:
+            $ref: '#/components/schemas/Portfolio-write'
     'Result:jsonld-read':
       type: object
       description: ''
@@ -9243,6 +10330,7 @@ components:
         description:
           description: 'Description of the results'
           type: string
+          nullable: true
         products:
           type: array
           items:
@@ -9273,6 +10361,10 @@ components:
           type: string
           format: date-time
           nullable: true
+        portfolios:
+          type: array
+          items:
+            $ref: '#/components/schemas/Portfolio:jsonld-read'
       required:
         - name
         - description
@@ -9298,6 +10390,7 @@ components:
         description:
           description: 'Description of the results'
           type: string
+          nullable: true
         products:
           type: array
           items:
@@ -9318,6 +10411,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Reflection:jsonld-write'
+        portfolios:
+          type: array
+          items:
+            $ref: '#/components/schemas/Portfolio:jsonld-write'
 definitions:
   Activity-read:
     properties:
@@ -9343,14 +10440,12 @@ definitions:
         maxLength: 255
       startDate:
         description: 'The date the activity started.'
-        type: string
-        example: '2020-06-18 10:22:11'
-        format: date-time
+        type: \DateTime
+        example: 10-02-2019
       endDate:
         description: 'The date the activity ended.'
-        type: string
-        example: '2020-06-18 10:22:11'
-        format: date-time
+        type: \DateTime
+        example: 10-12-2019
       gradeType:
         description: 'Type of the grade E.G the max obtainable points'
         type: string
@@ -9378,7 +10473,6 @@ definitions:
         type: \ArrayCollection
     required:
       - name
-      - description
       - type
       - gradeType
       - evaluation
@@ -9402,14 +10496,12 @@ definitions:
         maxLength: 255
       startDate:
         description: 'The date the activity started.'
-        type: string
-        example: '2020-06-18 10:22:11'
-        format: date-time
+        type: \DateTime
+        example: 10-02-2019
       endDate:
         description: 'The date the activity ended.'
-        type: string
-        example: '2020-06-18 10:22:11'
-        format: date-time
+        type: \DateTime
+        example: 10-12-2019
       gradeType:
         description: 'Type of the grade E.G the max obtainable points'
         type: string
@@ -9431,119 +10523,10 @@ definitions:
         type: \ArrayCollection
     required:
       - name
-      - description
       - type
       - gradeType
       - evaluation
       - reference
-  Result-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this object'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      name:
-        description: 'Name of the Results'
-        type: string
-        example: 'Result name'
-        maxLength: 255
-      description:
-        description: 'Description of the results'
-        type: string
-        example: 'description of the results'
-        maxLength: 2550
-      dateCreated:
-        description: 'The moment this resource was created'
-        type: \Datetime
-      dateModified:
-        description: 'The moment this resource last Modified'
-        type: \Datetime
-      products: []
-      activities: []
-      evaluations: []
-      formalRecognitions: []
-      reflections: []
-    required:
-      - name
-      - description
-  Result-write:
-    properties:
-      name:
-        description: 'Name of the Results'
-        type: string
-        example: 'Result name'
-        maxLength: 255
-      description:
-        description: 'Description of the results'
-        type: string
-        example: 'description of the results'
-        maxLength: 2550
-      products: []
-      activities: []
-      evaluations: []
-      formalRecognitions: []
-      reflections: []
-    required:
-      - name
-      - description
-  Product-read:
-    properties:
-      id:
-        description: 'The UUID identifier of this object'
-        type: string
-        example: e2984465-190a-4562-829e-a8cca81aa35d
-        format: uuid
-      name:
-        description: 'Name of the product'
-        type: string
-        example: 'Art and me'
-        maxLength: 255
-      description:
-        description: 'Description of the product'
-        type: string
-        example: 'A painting about my cat'
-        maxLength: 2550
-      type:
-        description: 'Type of the product'
-        type: string
-        example: 'assessed product'
-        maxLength: 255
-      dateCreated:
-        description: 'The moment this resource was created'
-        type: \Datetime
-      dateModified:
-        description: 'The moment this resource last Modified'
-        type: \Datetime
-      result: []
-      activity: []
-    required:
-      - name
-      - description
-      - type
-  Product-write:
-    properties:
-      name:
-        description: 'Name of the product'
-        type: string
-        example: 'Art and me'
-        maxLength: 255
-      description:
-        description: 'Description of the product'
-        type: string
-        example: 'A painting about my cat'
-        maxLength: 2550
-      type:
-        description: 'Type of the product'
-        type: string
-        example: 'assessed product'
-        maxLength: 255
-      result: []
-      activity: []
-    required:
-      - name
-      - description
-      - type
   Evaluation-read:
     properties:
       id:
@@ -9580,7 +10563,6 @@ definitions:
       result: []
     required:
       - name
-      - description
   Evaluation-write:
     properties:
       name:
@@ -9606,7 +10588,6 @@ definitions:
       result: []
     required:
       - name
-      - description
   FormalRecognition-read:
     properties:
       id:
@@ -9623,7 +10604,7 @@ definitions:
         description: 'Description of the recognition'
         type: string
         example: 'description of the recognition'
-        maxLength: 2550
+        maxLength: 255
       organisation:
         description: 'Name of the organisation.'
         type: string
@@ -9641,9 +10622,8 @@ definitions:
         maxLength: 255
       dateReceived:
         description: 'The date you received the recognition.'
-        type: string
-        example: '2020-06-18 10:22:11'
-        format: date-time
+        type: \DateTime
+        example: 10-02-2019
       dateCreated:
         description: 'The moment this resource was created'
         type: \Datetime
@@ -9653,7 +10633,6 @@ definitions:
       result: []
     required:
       - name
-      - description
   FormalRecognition-write:
     properties:
       name:
@@ -9665,7 +10644,7 @@ definitions:
         description: 'Description of the recognition'
         type: string
         example: 'description of the recognition'
-        maxLength: 2550
+        maxLength: 255
       organisation:
         description: 'Name of the organisation.'
         type: string
@@ -9683,13 +10662,123 @@ definitions:
         maxLength: 255
       dateReceived:
         description: 'The date you received the recognition.'
-        type: string
-        example: '2020-06-18 10:22:11'
-        format: date-time
+        type: \DateTime
+        example: 10-02-2019
       result: []
     required:
       - name
-      - description
+  Portfolio-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this object'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      name:
+        description: 'Name of the portfolio'
+        type: string
+        example: 'title of the portfolio'
+        maxLength: 255
+      description:
+        description: 'Description of the portfolio'
+        type: string
+        example: 'Description of the portfolio'
+        maxLength: 255
+      dateCreated:
+        description: 'The moment this resource was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this resource last Modified'
+        type: \Datetime
+      owner:
+        description: 'The owner where this Portfolio is related too'
+        type: string
+        example: 'https://cc.conduction.nl/people'
+        maxLength: 255
+        format: url
+      results: []
+      products: []
+    required:
+      - name
+  Portfolio-write:
+    properties:
+      name:
+        description: 'Name of the portfolio'
+        type: string
+        example: 'title of the portfolio'
+        maxLength: 255
+      description:
+        description: 'Description of the portfolio'
+        type: string
+        example: 'Description of the portfolio'
+        maxLength: 255
+      owner:
+        description: 'The owner where this Portfolio is related too'
+        type: string
+        example: 'https://cc.conduction.nl/people'
+        maxLength: 255
+        format: url
+      results: []
+      products: []
+    required:
+      - name
+  Product-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this object'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      name:
+        description: 'Name of the product'
+        type: string
+        example: 'Art and me'
+        maxLength: 255
+      description:
+        description: 'Description of the product'
+        type: string
+        example: 'A painting about my cat'
+        maxLength: 255
+      type:
+        description: 'Type of the product'
+        type: string
+        example: 'assessed product'
+        maxLength: 255
+      dateCreated:
+        description: 'The moment this resource was created'
+        type: \Datetime
+      dateModified:
+        description: 'The moment this resource last Modified'
+        type: \Datetime
+      result: []
+      activity: []
+      portfolios: []
+    required:
+      - name
+      - type
+  Product-write:
+    properties:
+      name:
+        description: 'Name of the product'
+        type: string
+        example: 'Art and me'
+        maxLength: 255
+      description:
+        description: 'Description of the product'
+        type: string
+        example: 'A painting about my cat'
+        maxLength: 255
+      type:
+        description: 'Type of the product'
+        type: string
+        example: 'assessed product'
+        maxLength: 255
+      result: []
+      activity: []
+      portfolios: []
+    required:
+      - name
+      - type
   Reflection-read:
     properties:
       id:
@@ -9706,7 +10795,7 @@ definitions:
         description: 'Description of the reflection'
         type: string
         example: 'description of reflection'
-        maxLength: 2550
+        maxLength: 255
       status:
         description: 'The status of this reflection.'
         type: string
@@ -9729,9 +10818,7 @@ definitions:
         description: 'The moment this resource last Modified'
         type: \Datetime
       result: []
-    required:
-      - name
-      - description
+    required: []
   Reflection-write:
     properties:
       name:
@@ -9743,7 +10830,7 @@ definitions:
         description: 'Description of the reflection'
         type: string
         example: 'description of reflection'
-        maxLength: 2550
+        maxLength: 255
       status:
         description: 'The status of this reflection.'
         type: string
@@ -9760,62 +10847,60 @@ definitions:
         example: 'https://cc.zaakonline.nl/people/e2984465-190a-4562-829e-a8cca81aa35d'
         format: url
       result: []
-    required:
-      - name
-      - description
-  ChangeLog-read:
+    required: []
+  Result-read:
     properties:
       id:
         description: 'The UUID identifier of this object'
         type: string
         example: e2984465-190a-4562-829e-a8cca81aa35d
         format: uuid
-      note:
-        description: 'A note conserning this log lin'
+      name:
+        description: 'Name of the Results'
         type: string
-        example: 'This log line is suspicius'
-        maxLength: 2555
-      action:
-        description: ''
+        example: 'Result name'
+        maxLength: 255
+      description:
+        description: 'Description of the results'
         type: string
-      objectId:
-        description: ''
-        type: string
-      objectClass:
-        description: ''
-        type: string
-      version:
-        description: ''
-        type: int
-      data:
-        description: ''
-        type: array
-      username:
-        description: ''
-        type: string
-      session:
-        description: 'The moment this request was created'
-        type: string
+        example: 'description of the results'
         maxLength: 255
       dateCreated:
-        description: 'The moment this request was created'
-        type: string
-        format: date-time
-        example: '2020-06-18 10:22:11'
+        description: 'The moment this resource was created'
+        type: \Datetime
       dateModified:
-        description: 'The moment this request last Modified'
-        type: string
-        format: date-time
-        example: '2020-06-18 10:22:11'
-    required: []
-  ChangeLog-write:
+        description: 'The moment this resource last Modified'
+        type: \Datetime
+      products: []
+      activities: []
+      evaluations: []
+      formalRecognitions: []
+      reflections: []
+      portfolios: []
+    required:
+      - name
+      - description
+  Result-write:
     properties:
-      note:
-        description: 'A note conserning this log lin'
+      name:
+        description: 'Name of the Results'
         type: string
-        example: 'This log line is suspicius'
-        maxLength: 2555
-    required: []
+        example: 'Result name'
+        maxLength: 255
+      description:
+        description: 'Description of the results'
+        type: string
+        example: 'description of the results'
+        maxLength: 255
+      products: []
+      activities: []
+      evaluations: []
+      formalRecognitions: []
+      reflections: []
+      portfolios: []
+    required:
+      - name
+      - description
   AuditTrail-read:
     properties:
       id:
@@ -9920,12 +11005,12 @@ definitions:
         description: 'The moment this request was created'
         type: string
         format: date-time
-        example: '2020-06-18 10:22:11'
+        example: '2020-11-23 15:06:28'
       dateModified:
         description: 'The moment this request last Modified'
         type: string
         format: date-time
-        example: '2020-06-18 10:22:11'
+        example: '2020-11-23 15:06:28'
     required: []
   AuditTrail-write:
     properties:
@@ -9935,21 +11020,62 @@ definitions:
         example: 'This log line looks suspicius'
         maxLength: 2555
     required: []
+  ChangeLog-read:
+    properties:
+      id:
+        description: 'The UUID identifier of this object'
+        type: string
+        example: e2984465-190a-4562-829e-a8cca81aa35d
+        format: uuid
+      note:
+        description: 'A note conserning this log lin'
+        type: string
+        example: 'This log line is suspicius'
+        maxLength: 2555
+      action:
+        description: ''
+        type: string
+      objectId:
+        description: ''
+        type: string
+      objectClass:
+        description: ''
+        type: string
+      version:
+        description: ''
+        type: int
+      data:
+        description: ''
+        type: array
+      username:
+        description: ''
+        type: string
+      session:
+        description: 'The moment this request was created'
+        type: string
+        maxLength: 255
+      dateCreated:
+        description: 'The moment this request was created'
+        type: string
+        format: date-time
+        example: '2020-11-23 15:06:28'
+      dateModified:
+        description: 'The moment this request last Modified'
+        type: string
+        format: date-time
+        example: '2020-11-23 15:06:28'
+    required: []
+  ChangeLog-write:
+    properties:
+      note:
+        description: 'A note conserning this log lin'
+        type: string
+        example: 'This log line is suspicius'
+        maxLength: 2555
+    required: []
 tags:
   -
     name: Activity
-    description: |
-      
-      
-      
-  -
-    name: Result
-    description: |
-      
-      
-      
-  -
-    name: Product
     description: |
       
       
@@ -9967,19 +11093,37 @@ tags:
       
       
   -
+    name: Portfolio
+    description: |
+      
+      
+      
+  -
+    name: Product
+    description: |
+      
+      
+      
+  -
     name: Reflection
     description: |
       
       
       
   -
-    name: ChangeLog
+    name: Result
+    description: |
+      
+      
+      
+  -
+    name: AuditTrail
     description: |
       An resource representing a log line.
       
       This entity represents a product that can be ordered via the OrderRegistratieComponent.
   -
-    name: AuditTrail
+    name: ChangeLog
     description: |
       An resource representing a log line.
       
@@ -9990,15 +11134,15 @@ securityDefinitions:
     authorizationUrl: 'http://petstore.swagger.io/api/oauth/dialog'
     flow: implicit
     scopes:
-      read: 'read right to the AuditTrail resource'
-      write: 'write right to the AuditTrail resource'
+      read: 'read right to the ChangeLog resource'
+      write: 'write right to the ChangeLog resource'
   JWT-Token:
     type: apiKey
     in: header
     name: Authorization
     scopes:
-      read: 'read right to the AuditTrail resource'
-      write: 'write right to the AuditTrail resource'
+      read: 'read right to the ChangeLog resource'
+      write: 'write right to the ChangeLog resource'
 host: irc.zaakonline.nl
 servers:
   -
