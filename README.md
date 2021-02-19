@@ -1,4 +1,4 @@
-# pfc
+# portfolio-component
 
 Description
 ----
